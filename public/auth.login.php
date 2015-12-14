@@ -12,7 +12,6 @@
 <body>
 
     <div class="container">
-
       <form class="form-signin">
         <h2 class="form-signin-heading">Please sign in</h2>
         <h3 class="form-signin-heading">New? <a href="users.create.php">Sign up!</a></h3>
@@ -27,13 +26,10 @@
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
       </form>
-
     </div> <!-- /container -->
-
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
-  
 
 </body>
 </html
