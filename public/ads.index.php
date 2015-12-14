@@ -65,13 +65,13 @@
 <div class="ads_main"
     <div class="row">
             <div class="col-md-4 portfolio-item">
-                <a href="#">
+                <a href="ads.show.php">
                     <img class="img-responsive" src="http://placehold.it/700x400" alt="">
                 </a>
                 <h3>
-                    <a href="#">Project Name</a>
+                    <a href="ads.show.php">Fake crap for sale</a>
                 </h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+                <p>10 cents a pail.</p>
             </div>
             <div class="col-md-4 portfolio-item">
                 <a href="#">
