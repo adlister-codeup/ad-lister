@@ -1,7 +1,5 @@
 <?php
 require 'migration.php';
-
-
 $delete = 'TRUNCATE users';
 $dbc->exec($delete);
 
