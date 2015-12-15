@@ -8,11 +8,11 @@ $dbc->exec($query);
 
 $table = "CREATE TABLE IF NOT EXISTS users (
 		id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-		username VARCHAR(50) NOT NULL,
-		hash CHAR(64) NOT NULL,
+		username VARCHAR(50) UNIQUE NOT NULL,
+		hash CHAR(64) UNIQUE NOT NULL,
 		first_name VARCHAR(50) NOT NULL,
 		last_name VARCHAR(75) NOT NULL,
-		email VARCHAR(150) NOT NULL,
+		email VARCHAR(150) UNIQUE NOT NULL,
 		birth_date DATE NOT NULL,
 		GENDER CHAR(1) NOT NULL,
 		PRIMARY KEY (id)
