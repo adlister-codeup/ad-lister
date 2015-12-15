@@ -139,5 +139,4 @@ class BaseModel {
         return $instance;
     }
         // @TODO: Learning from the previous method, return all the matching records
-   }
 }
