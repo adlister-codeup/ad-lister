@@ -1,4 +1,62 @@
-
+<?php 
+require_once '../utils/Input.php';
+require_once '../models/User.php';
+$errors = [];
+if (!empty($_POST)) {
+     try {
+        $userName = Input::getString('user_name');
+    } catch (Exception $e) {
+        $errors['user_name'] = $e->getMessage();
+    }
+    try {
+        $firstName = Input::getString('first_name');
+    } catch (Exception $e) {
+        $errors['first_name'] = $e->getMessage();
+    }
+    try {
+        $lastName = Input::getString('last_name');
+    } catch (Exception $e) {
+        $errors['last_name'] = $e->getMessage();
+    }
+    try {
+        $password = Input::getString('password');
+    } catch (Exception $e) {
+        $errors['password'] = $e->getMessage();
+    }
+    try {
+        $reEnterPassword = Input::getString('reenterpassword');
+    } catch (Exception $e) {
+        $errors['reenterpassword'] = $e->getMessage();
+    }
+    try {
+        $email = Input::getString('email');
+    } catch (Exception $e) { 
+        $errors['email'] = $e->getMessage();
+    }
+    try {
+        $dateTimeObject = Input::getDate('birth_date', new DateTime('1900-01-01'), new DateTime());
+    } catch (Exception $e) {
+        $errors['birth_date'] = $e->getMessage();
+    }
+    try {
+        $gender = Input::getString('gender');
+    } catch (Exception $e) {
+        $errors['gender'] = $e->getMessage();
+    }
+    if (empty($errors)) {
+    $formattedDate = $dateTimeObject->format('Y-m-d');
+        $user = new User;
+        $user->user_name = Input::get($userName);
+        $user->first_name = Input::get($first_name);
+        $user->last_name = Input::get($last_name);
+        $user->hash = hash('sah256',Input::get($reenterpassword));
+        $user->email = Input::get($email);
+        $user->birth_date = Input::get($formattedDate);
+        $user->gender = Input::get($gender);
+        $user->save();
+    }
+}
+$findError = 'errorFinder'; ?>
 <!DOCTYPE html>
 
 
