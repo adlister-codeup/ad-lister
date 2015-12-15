@@ -1,5 +1,5 @@
 <?php
-	require_once "../models/AdTable.php";
+	require_once "../../models/AdTable.php";
 
 	if (isset($_POST["page"]))
 	{
