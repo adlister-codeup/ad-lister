@@ -49,7 +49,7 @@ if (!empty($_POST)) {
         $user->user_name = Input::get($userName);
         $user->first_name = Input::get($first_name);
         $user->last_name = Input::get($last_name);
-        $user->password = hash('sah256',Input::get($password));
+        $user->hash = hash('sah256',Input::get($reenterpassword));
         $user->email = Input::get($email);
         $user->birth_date = Input::get($formattedDate);
         $user->gender = Input::get($gender);
@@ -71,7 +71,6 @@ $findError = 'errorFinder';
   <?php include '../views/partials/navbar.php'; ?>
 </head>
 <body>
-
 	            <div class="row">
                     <div class="col-xs-6 col-md-6">
                         <input class="form-control" name="user_name" placeholder="Enter a UserName" type="text"

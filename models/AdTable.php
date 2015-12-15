@@ -1,6 +1,6 @@
 <?php
-	require_once "../utils/Log.php";
-	require_once '../database/private.php';
+	require_once "../../utils/Log.php";
+	require_once '../../database/private.php';
 
 	class AdTable 
 	{
@@ -20,7 +20,7 @@
 			$logger = new Log("AdTable", "loadAds", "logs");
 			$logger->info("user is set to: {$this->user}");
 			$dbc = $this->database();
-			$query = "SELECT owner, title, description, email, phone, price, location, images FROM ads LIMIT :limit OFFSET :offset";
+			$query = "SELECT id, owner, title, description, email, phone, price, location, images FROM ads LIMIT :limit OFFSET :offset";
 			$stmt = $dbc->prepare($query);
 			$stmt->bindValue(":limit", 25, PDO::PARAM_INT);
 			$stmt->bindValue(":offset", $offset, PDO::PARAM_INT);
