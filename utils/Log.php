@@ -33,7 +33,7 @@
 		{
 			fclose($this->handle);
 		}
-		public function logMessage ($logLevel, $message)
+		public function logMessage ($logLevel, $message) //logs message
 		{
 			if ($this->enableMicroseconds)
 			{
@@ -48,13 +48,21 @@
 			}
 			fwrite($this->handle, "[{$this->subname}] {$time} [{$logLevel}] {$message}".PHP_EOL); // write to file
 		}
-		public function info ($message)
+		public function info ($message) //logs with an info tag
 		{
 			$this->logMessage("INFO", $message);
 		}
-		public function error ($message)
+		public function error ($message) // logs with an error tag
 		{
 			$this->logMessage("ERROR", $message);
+		}
+		public function varLog($var) //logs the contents of a var_dump to file
+		{
+			ob_start(); // start reading the internal buffer
+			var_dump($var);
+			$grabbed_information = ob_get_contents(); // assigning the internal buffer contents to variable
+			ob_end_clean(); // clearing the internal buffer.
+			$this->logMessage("VARLOG", $grabbed_information);
 		}
 	}
 ?>
