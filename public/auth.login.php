@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 
-
 <head>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -10,8 +9,7 @@
   <?php include '../views/partials/navbar.php'; ?>
 </head>
 <body>
-
-    <div class="container">
+    <div class="container center-block">
       <form class="form-signin">
         <h2 class="form-signin-heading">Please sign in</h2>
         <h3 class="form-signin-heading">New? <a href="users.create.php">Sign up!</a></h3>
@@ -26,10 +24,6 @@
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
       </form>
-    </div> <!-- /container -->
-
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
-
+    </div>
 </body>
 </html

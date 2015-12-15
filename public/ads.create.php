@@ -5,11 +5,16 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		<link rel="stylesheet" href="../css/home.css">
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-		<title>Add a Listing</title>
+ 		<?php include '../views/partials/navbar.php'; ?>
+		<title>Krieger's List</title>
+		<div class="container">
+    		<div class="page-header">
+   				<h2>Post your listing</h2>
+    		</div>
+		</div>
 	</head>
 	<body>
-	 		<?php include '../views/partials/navbar.php'; ?>
-	 		<?php include '../views/partials/header.php'; ?>
+		<div class="container center-block">
 	 		<div class="row">
 		 		<div class="col-md-10 col-md-offset-1">
 			 		<form class="form-group">
@@ -33,7 +38,7 @@
 			 		</form>
 		 		</div>
 		 	</div>
-
-	 		<?php include '../views/partials/footer.php'; ?>
+		 </div>
+	 	<?php include '../views/partials/footer.php'; ?>
 	</body>
 </html>

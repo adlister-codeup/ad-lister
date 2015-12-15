@@ -71,11 +71,7 @@ $findError = 'errorFinder';
   <?php include '../views/partials/navbar.php'; ?>
 </head>
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="">
-                <h2 class="form-signin-heading">Sign up!</h2>
-                <form action="#" method="post" class="form" role="form">
+
 	            <div class="row">
                     <div class="col-xs-6 col-md-6">
                         <input class="form-control" name="user_name" placeholder="Enter a UserName" type="text"

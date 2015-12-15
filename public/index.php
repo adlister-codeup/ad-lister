@@ -8,9 +8,9 @@
 	<title>Krieger's List</title>
 </head>
 <body>
- 		<?php include '../views/partials/navbar.php'; ?>
- 		<?php include '../views/partials/header.php'; ?>
- 		<?php include '../views/partials/footer.php'; ?>
- 		<?php include 'ads.index.php'; ?>
+ 	<?php include '../views/partials/navbar.php'; ?>
+ 	<?php include '../views/partials/header.php'; ?>
+ 	<?php include '../views/partials/footer.php'; ?>
+ 	<?php include 'ads.index.php'; ?>
 </body>
 </html>
