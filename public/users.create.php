@@ -14,7 +14,7 @@
 	<div class="container">
 	    <div class="row">
 	        <div class="">
-	            <h2 class="form-signin-heading">Please sign up</h2>
+	            <h2 class="form-signin-heading">Sign up!</h2>
 	            <form action="#" method="post" class="form" role="form">
 	            <div class="row">
 	                <div class="col-xs-6 col-md-6">
@@ -26,15 +26,15 @@
 	                </div>
 	            </div>
 	            <input class="form-control" name="youremail" placeholder="Your Email" type="email" />
-	            <input class="form-control" name="reenteremail" placeholder="Re-enter Email" type="email" />
 	            <input class="form-control" name="password" placeholder="New Password" type="password" />
+	            <input class="form-control" name="reenterpassword" placeholder="Re-enter Password" type="password" />
 	            <label for="">Birth Date</label>
 	            <div class="row">
 	                <div class="col-xs-4 col-md-4">
 	                    <select class="form-control">
 	                        <option value="Month">Month</option>
 	                        <option value="Month">January</option>
-	                        <option value="Month">jasdf</option>
+	                        <option value="Month">February</option>
 	                    </select>
 	                </div>
 	                <div class="col-xs-4 col-md-4">

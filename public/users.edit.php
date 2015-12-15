@@ -6,6 +6,9 @@
   <title>Krieger's List</title>
   <?php include '../views/partials/navbar.php'; ?>
 </head>
+
+<body>
+  
 <div class="container">
     <h1>Edit Profile</h1>
   	<hr>

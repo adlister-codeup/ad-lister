@@ -1,5 +1,5 @@
 <footer class="footer">
-    <div class="container">
-       <p class="text-muted">Maybe a copywrite here?</p>
+    <div class="container navbar-inner" style="float:right">
+    	<button type="button" class="btn btn-danger"><a href="../auth.logout.php">Logout</a></button>
     </div>
 </footer>

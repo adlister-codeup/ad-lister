@@ -1,3 +1,5 @@
+
+
 <div id="content" class="container">
     <div id="extra-search-small" class="row">
         <div class="hero-small">
@@ -62,7 +64,6 @@
             </ul>
         </div>
     </div>
-<div class="ads_main"
     <div class="row">
             <div class="col-md-4 portfolio-item">
                 <a href="ads.show.php">
@@ -157,10 +158,10 @@
         </div>
     </div>
 
-    <div class="row">
-    <div class="ap-summary-map-main-container" data-map-id=""></div>     
     <div id="summary-toolbar" class="navbar navbar-default">
-    <div class="navbar-left"><span class="found">1-12 of however many results</span></div>
+        <div class="navbar-left">
+            <span class="found">1-12 of however many results</span>
+        </div>
     <div class="navbar-right">
         <h4>Per page: </h4>
         <select name="ap_perpage" class="ap_perpage" onchange="location.href='/fort-worth/all-categories/search?search_type=advanced&amp;ap_search_keyword=yes yes yes&amp;limit=' + this.value;" style="display: none;">
@@ -209,7 +210,5 @@
             </ul>
         </div>
     </div>
-    </div>
-    </div>
-    </div>
+</div>
 </div>
