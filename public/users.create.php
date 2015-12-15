@@ -1,5 +1,7 @@
 <?php 
 require_once '../utils/Input.php';
+require_once '../utils/Log.php';
+$logger = new Log("users.create.php","signup", "logs");
 require_once '../models/User.php';
 $errors = [];
 if (!empty($_POST)) {
@@ -24,7 +26,7 @@ if (!empty($_POST)) {
         $errors['password'] = $e->getMessage();
     }
     try {
-        $reEnterPassword = Input::getString('reenterpassword');
+        $reEnterPassword = Input::getString('re_enter_password');
     } catch (Exception $e) {
         $errors['reenterpassword'] = $e->getMessage();
     }
@@ -43,13 +45,14 @@ if (!empty($_POST)) {
     } catch (Exception $e) {
         $errors['gender'] = $e->getMessage();
     }
+    var_dump($errors);
     if (empty($errors)) {
     $formattedDate = $dateTimeObject->format('Y-m-d');
         $user = new User;
         $user->user_name = Input::get($userName);
-        $user->first_name = Input::get($first_name);
-        $user->last_name = Input::get($last_name);
-        $user->hash = hash('sah256',Input::get($reenterpassword));
+        $user->first_name = Input::get($firstName);
+        $user->last_name = Input::get($lastName);
+        $user->hash = hash('sah256',Input::get($reEnterPassword));
         $user->email = Input::get($email);
         $user->birth_date = Input::get($formattedDate);
         $user->gender = Input::get($gender);
@@ -94,11 +97,11 @@ $findError = 'errorFinder'; ?>
 		                </div>
 		            </div>
 		            <label for="email" type="email" id="email">E-mail</label>
-		            <input class="form-control" name="youremail" placeholder="Your Email" type="email">
+		            <input class="form-control" name="email" placeholder="Your Email" type="email">
 		            <label for="password" type="password" id="password">Password</label>
 		            <input class="form-control" name="password" placeholder="New Password" type="password">
 		            <label for="reenterpassword" type="reenterpassword" id="reenterpassword">Re-enter password</label>
-		            <input class="form-control" name="reenterpassword" placeholder="Re-enter Password" type="password">
+		            <input class="form-control" name="re_enter_password" placeholder="Re-enter Password" type="password">
 		            <label for="birthdate" type="text" id="birthdate">Birthdate</label>
 		            <input class="form-control" name="birth_date" placeholder="Birthday" type="text">
 		            <label class="radio-inline">
