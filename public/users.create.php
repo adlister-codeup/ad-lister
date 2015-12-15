@@ -86,11 +86,11 @@ $findError = 'errorFinder'; ?>
                     </div>
                     <div class="row">
 		                <div class="col-xs-6 col-md-6">
-		                    <input class="form-control" name="firstname" placeholder="First Name" type="text"
+		                    <input class="form-control" name="first_name" placeholder="First Name" type="text"
 		                        required autofocus>
 		                </div>
 		                <div class="col-xs-6 col-md-6">
-		                    <input class="form-control" name="lastname" placeholder="Last Name" type="text" required>
+		                    <input class="form-control" name="last_name" placeholder="Last Name" type="text" required>
 		                </div>
 		            </div>
 		            <label for="email" type="email" id="email">E-mail</label>
@@ -100,7 +100,7 @@ $findError = 'errorFinder'; ?>
 		            <label for="reenterpassword" type="reenterpassword" id="reenterpassword">Re-enter password</label>
 		            <input class="form-control" name="reenterpassword" placeholder="Re-enter Password" type="password">
 		            <label for="birthdate" type="text" id="birthdate">Birthdate</label>
-		            <input class="form-control" name="birthdate" placeholder="Birthday" type="date">
+		            <input class="form-control" name="birth_date" placeholder="Birthday" type="text">
 		            <label class="radio-inline">
 		                <input type="radio" name="sex" id="inlineCheckbox1" value="male">
 		                Male
