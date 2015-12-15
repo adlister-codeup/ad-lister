@@ -3,7 +3,7 @@
 	$dbc = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, USER, PASS);
 	$dbc->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-	$delete = 'TRUNCATE users';
+	$delete = 'TRUNCATE ads';
 	$dbc->exec($delete);
 
 	$data = [
