@@ -140,4 +140,4 @@ class BaseModel {
     }
         // @TODO: Learning from the previous method, return all the matching records
    }
-}
+

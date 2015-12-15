@@ -83,6 +83,8 @@ $findError = 'errorFinder'; ?>
 	                        <input class="form-control" name="user_name" placeholder="Enter a UserName" type="text"
 	                            required autofocus />
 	                    </div>
+                    </div>
+                    <div class="row">
 		                <div class="col-xs-6 col-md-6">
 		                    <input class="form-control" name="firstname" placeholder="First Name" type="text"
 		                        required autofocus>
