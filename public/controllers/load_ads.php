@@ -1,9 +1,9 @@
 <?php
 	require_once "../models/AdTable.php";
 
-	if (isset($_GET["page"]))
+	if (isset($_POST["page"]))
 	{
-		$offset = ($_GET["page"] - 1) * 25;
+		$offset = ($_POST["page"] - 1) * 25;
 	}
 	else 
 	{
