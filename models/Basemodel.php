@@ -15,7 +15,7 @@ class BaseModel {
     {
         if (!self::$dbc)
         {
-           require_once 'db_connect.php';
+           require_once '../database/db_connect.php';
            self::$dbc = $dbc;
         }
     }
