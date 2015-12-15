@@ -20,8 +20,7 @@ foreach ($tableInfo as $info) {
     	'{$info['last_name']}', 
     	'{$info['email']}', 
     	'{$info['birth_date']}',
-    	'{$info['gender']}',
-    	'{$info['shared']}'
+    	'{$info['gender']}'
     	)";
 
     $dbc->exec($query);
