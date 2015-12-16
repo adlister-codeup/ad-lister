@@ -26,7 +26,7 @@ if (!empty($_POST)) {
         $errors['password'] = $e->getMessage();
     }
     try {
-        $confirmPassword = Input::getString('re_enter_password');
+        $confirmPassword = Input::getString('confirm_password');
     } catch (Exception $e) {
         $errors['confirm_password'] = $e->getMessage();
     }
@@ -57,9 +57,11 @@ if (!empty($_POST)) {
         $user->birth_date = $formattedDate;
         $user->gender = $gender;
         $user->save();
+        header("Location: /users.edit.php");
     }
 }
-$findError = 'errorFinder'; ?>
+$findError = 'errorFinder'; 
+?>
 <!DOCTYPE html>
 
 
@@ -85,28 +87,24 @@ $findError = 'errorFinder'; ?>
                 <form action="#" method="post" id ="signup" class="form" role="form">
                     <div class="row">
                         <div class="col-xs-6 col-md-6">
-                            <input class="form-control" id='username' name="username" placeholder="Enter a UserName" type="text"
-                                required autofocus />
+                            <label class='sign_up' name='register'>Register</label>
+                            <input class="form-control" id='username' name="username" placeholder="Enter a UserName" type="text" value='<?= isset($_POST['username']) && empty($errors['username'])? $_POST['username']: ''?>'
+                                required autofocus><br>
                         </div>
                     </div>
-                    <br>
                     <div class="row">
                         <div class="col-xs-6 col-md-6">
-                            <input class="form-control" id='firstname' name="firstname" placeholder="First Name" type="text"
-                                required autofocus>
+                            <input class="form-control" id='firstname' name="firstname" placeholder="First Name" type="text" value='<?= isset($_POST['firstname']) && empty($errors['firstname'])? $_POST['firstname']: ''?>'
+                                required autofocus><br>
                         </div>
                         <div class="col-xs-6 col-md-6">
-                            <input class="form-control" id='lastname' name="lastname" placeholder="Last Name" type="text">
+                            <input class="form-control" id='lastname' name="lastname" placeholder="Last Name" type="text" value='<?= isset($_POST['lastname']) && empty($errors['lastname'])? $_POST['lastname']: ''?>'><br>
                         </div>
                     </div>
-                    <label for="email" type="email" id="email"><br>E-mail</label>
-                    <input class="form-control" id='email' name="email" placeholder="Your Email" type="email">
-                    <label for="password" type="password" id="password"><br>Password</label>
-                    <input class="form-control" name="password" placeholder="New Password" type="password">
-                    <label for="confirm_password" id='password' type="confirm_password" id="confirm_password"><br>Re-enter password</label>
-                    <input class="form-control" id='confirm_password' name="confirm_password" placeholder="Re-enter Password" type="password">
-                    <label for="birthdate" type="text" id="birthdate"><br>Birthdate</label>
-                    <input class="form-control" name="birth_date" placeholder="Birthday" type="text">
+                    <input class="form-control" id='email' name="email" placeholder="Your Email" type="email" value='<?= isset($_POST['email']) && empty($errors['email'])? $_POST['email']: ''?>'><br>
+                    <input class="form-control" id ='password' name="password" placeholder="New Password" type="password" value='<?= isset($_POST['password']) && empty($errors['password'])? $_POST['password']: ''?>'><br>
+                    <input class="form-control" id='confirm_password' name="confirm_password" placeholder="Re-enter Password" type="password" value='<?= isset($_POST['confirm_password']) && empty($errors['confirm_password'])? $_POST['confirm_password']: ''?>'><br>
+                    <input class="form-control" name="birth_date" placeholder="Birthday" type="text" value='<?= isset($_POST['birth_date']) && empty($errors['birth_date'])? $_POST['birth_date']: ''?>'>
                     <label class="radio-inline">
                         <input type="radio" name="gender" id="inlineCheckbox1" value="male">
                         Male
@@ -115,64 +113,58 @@ $findError = 'errorFinder'; ?>
                         <input type="radio" name="gender" id="inlineCheckbox2" value="female">
                         Female
                     </label>
-                    <br />
-                    <br />
+                    <br>
                     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
                 </form>
             </div>
         </div>
     </div>
-<script>
-$.validator.setDefaults({
-        submitHandler: function() {
-            alert("submitted!");
-        }
-    });
+ <script>
 $(document).ready(function() {
+        $.validator.setDefaults({
+            submitHandler: function() {
+                form.submit();
+            }
+        });
+
     $("#signup").validate({
-        debug: true,
-        rules: {
-            firstname: "required",
-            lastname: "required",
-            password: {
-                required: true,
-                minlength: 5
+            rules: {
+                firstname: "required",
+                lastname: "required",
+                password: {
+                    required: true,
+                    minlength: 5
+                },
+                confirm_password: {
+                    required: true,
+                    minlength: 5,
+                    equalTo: "#password"
+                },
+                email: {
+                    required: true,
+                    email: true
+                },
             },
-            confirm_password: {
-                required: true,
-                minlength: 5,
-                equalTo: "#password"
-            },
-            email: {
-                required: true,
-                email: true
-            },
-            birthdate: {
-                required: true
+            messages: {
+                firstname: "Please enter your first name",
+                lastname: "Please enter your last name",
+                password: {
+                    required: "Please enter a password",
+                    minlength: "Password must be atleast 5 letters"
+                },
+                confirm_password: {
+                    required: "Please confirm password",
+                    minlength: "Password must be atleast 5 letters",
+                    equalTo: "Must be equal to password"
+                },
+                email: {
+                    required: "Please enter a email",
+                    email: "Your email address must be in the format of name@domain.com"
+                },
             }
-        },
-        messages: {
-            firstname: "Please specify first name",
-            lastname: "Please specify last name",
-            username: {
-                require: "Please specify username",
-                minlength: "Username must be atleast 5 letters"
-            },
-            password: {
-                required: "Please enter a password",
-                minlength: "Password must be atleast 5 letters"
-            },
-            confirm_password: {
-                required: "Please confirm password",
-                equalTo: "Must be equal to password"
-            },
-            email: {
-                required: "Please enter a email",
-                email: "Your email address must be in the format of name@domain.com"
-            }
-        }
     });
 });
+
 
 </script>
 </body>
