@@ -1,6 +1,6 @@
 "use strict";
 (function(){
-	$.ajax ({ // get request to load the contacts from the users file.
+	$.ajax ({ // get request to load the ads from the database.
 	    type: "GET",
 	    url:"controllers/load_ads.php",
 	    data: {
@@ -37,7 +37,28 @@
 				$(".h3of"+dataLocation).append(titlelink);
 				$(".divof"+dataLocation).append(desc);
 				dataLocation++;
+				if (dataLocation >= length)
+				{
+					break;
+				}
 			}
 		}
+	}
+	function pageChange(page) {
+		$.ajax ({
+	    type: "POST",
+	    url:"controllers/load_ads.php",
+	    data: {
+	    	page: page
+	    },
+	    dataType: "json",
+	    success: function(data) {
+	    	fillAds(data);
+	    }, error: function(data) {
+	    	console.log(data);
+	    }, done: function(data) {
+	    	console.log("done");
+	    }
+	});
 	}
 })();
