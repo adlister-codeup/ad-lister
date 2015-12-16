@@ -12,7 +12,7 @@
 		title VARCHAR(200) NOT NULL,
 		description TEXT NOT NULL,
 		email VARCHAR(100) NOT NULL,
-		phone BIGINT,
+		phone VARCHAR(12),
 		price FLOAT NOT NULL,
 		location VARCHAR(250) NOT NULL,
 		images TEXT,

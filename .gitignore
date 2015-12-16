@@ -1,3 +1,4 @@
 database/private.php
-utils/logs
 public/controllers/logs
+public/uploads
+.DS_store

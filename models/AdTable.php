@@ -4,16 +4,12 @@
 
 	class AdTable 
 	{
-		protected $user;
+		public $user;
 		protected function database()
 		{
 			$dbc = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, USER, PASS);
 			$dbc->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			return $dbc;
-		}
-		public function setUser($username)
-		{
-			$this->users = $username;
 		}
 		public function loadAds($offset, $amount)
 		{
@@ -26,22 +22,26 @@
 			$stmt->bindValue(":offset", $offset, PDO::PARAM_INT);
 			$stmt->execute();
 			$data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			foreach ($data as $key => $value) 
+			{
+				$data[$key]["images"] = explode("|", $data[$key]["images"]);
+			}
 			unset($logger);
 			return json_encode($data); // return the data as a json string
 		}
-		public function addAd($json)
+		public function addAd($data)
 		{
 			$logger = new Log("AdTable", "addAd", "logs");
 			$logger->info("owner is set to: {$this->user}");
+			$data["phone"] = preg_replace("/[^0-9]/", "", $data["phone"]);
 			$dbc = $this->database();
-			$data = json_decode($json);
 			$query = "INSERT into ads (owner, title, description, email, phone, price, location, images, categories) VALUES (:owner, :title, :description, :email, :phone, :price, :location, :images, :categories)";
 				$stmt = $dbc->prepare($query);
-				$stmt->bindValue(":owner", $data["owner"], PDO::PARAM_STR);
+				$stmt->bindValue(":owner", $this->user, PDO::PARAM_STR);
 				$stmt->bindValue(":title", $data["title"], PDO::PARAM_STR);
 				$stmt->bindValue(":description", $data["description"], PDO::PARAM_STR);
 				$stmt->bindValue(":email", $data["email"], PDO::PARAM_STR);
-				$stmt->bindValue(":phone", $data["phone"], PDO::PARAM_INT);
+				$stmt->bindValue(":phone", $data["phone"], PDO::PARAM_STR);
 				$stmt->bindValue(":price", $data["price"], PDO::PARAM_INT);
 				$stmt->bindValue(":location", $data["location"], PDO::PARAM_STR);
 				$stmt->bindValue(":images", $data["images"], PDO::PARAM_STR);
