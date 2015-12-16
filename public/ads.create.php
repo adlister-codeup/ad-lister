@@ -5,7 +5,7 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		<link rel="stylesheet" href="../css/home.css">
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
- 		<?php include '../views/partials/navbar.php'; ?>
+ 		<?php include '../views/partials/navbar.php';?>
 		<title>Krieger's List</title>
 		<div class="container">
     		<div class="page-header">
@@ -17,22 +17,25 @@
 		<div class="container center-block">
 	 		<div class="row">
 		 		<div class="col-md-10 col-md-offset-1">
-			 		<form class="form-group">
+			 		<form class="form-group" action="controllers/ad_save.php" method="POST" enctype="multipart/form-data">
 			 			<label for="title">Title</label>
-						<input class="form-control" type="text" id="title" placeholder="Title" required>
+						<input class="form-control" type="text" id="title" name="title" placeholder="Title" required>
 						<label for="desc">Description</label>
-						<textarea class="form-control" type="text" id="desc" placeholder="Description"></textarea>
+						<textarea class="form-control" type="text" id="desc" name="description" placeholder="Description"></textarea>
 						<label for="img">Images</label>
-						<input type="file" id="img" multiple>
+						<input type="file" name="images[]" id="img" multiple>
 						<label for="email">Email</label>
-						<input class="form-control" type="email" id="email" placeholder="email@email.email" required>
+						<input class="form-control" type="email" id="email" name="email" placeholder="email@email.email" required>
 						<label for="phone">Phone</label>
-						<input class="form-control" type="tel" id="phone" placeholder="Enter Phone Number">
+						<input class="form-control" type="tel" id="phone" name="phone" placeholder="Enter Phone Number">
 						<label for="price">Price $</label>
-						<input class="form-control" type="number" id="price" placeholder="0.00" required>
+						<input class="form-control" type="number" id="price" name="price" placeholder="0.00" required>
 						<label for="location">Location</label>
-						<input class="form-control" type="text" id="location" placeholder="san antonio">
+						<input class="form-control" type="text" id="location" name="location" placeholder="san antonio">
+						<label for="categories">Categories</label>
+						<input class="form-control" type="text" id="categories" name="categories" placeholder="pizza, legs, bionic">
 						<br>
+						<input type="text" name="change" value="add" hidden>
 						<button class="btn btn-default" type ="reset">Clear</button>
 						<button class="btn btn-success">Submit listing</button>
 			 		</form>
