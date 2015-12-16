@@ -1,6 +1,0 @@
-[signup] 2015-12-15 15:31:37 [INFO] This is working !
-[signup] 2015-12-15 15:31:48 [INFO] This is working !
-[signup] 2015-12-15 15:32:20 [INFO] This is working !
-[signup] 2015-12-15 15:35:32 [INFO] This is working !
-[signup] 2015-12-15 15:35:53 [INFO] This is working !
-[signup] 2015-12-15 15:36:01 [INFO] This is working !

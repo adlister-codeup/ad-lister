@@ -1,9 +1,10 @@
 "use strict";
 (function(){
 	$.ajax ({ // get request to load the ads from the database.
-	    type: "GET",
+	    type: "POST",
 	    url:"controllers/load_ads.php",
 	    data: {
+	    	amount: 12
 	    },
 	    dataType: "json",
 	    success: function(data) {
@@ -49,7 +50,8 @@
 	    type: "POST",
 	    url:"controllers/load_ads.php",
 	    data: {
-	    	page: page
+	    	page: page,
+	    	amount: 12
 	    },
 	    dataType: "json",
 	    success: function(data) {
