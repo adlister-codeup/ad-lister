@@ -15,14 +15,14 @@
 		{
 			$this->users = $username;
 		}
-		public function loadAds($offset)
+		public function loadAds($offset, $amount)
 		{
 			$logger = new Log("AdTable", "loadAds", "logs");
 			$logger->info("user is set to: {$this->user}");
 			$dbc = $this->database();
 			$query = "SELECT id, owner, title, description, email, phone, price, location, images FROM ads LIMIT :limit OFFSET :offset";
 			$stmt = $dbc->prepare($query);
-			$stmt->bindValue(":limit", 25, PDO::PARAM_INT);
+			$stmt->bindValue(":limit", $amount, PDO::PARAM_INT);
 			$stmt->bindValue(":offset", $offset, PDO::PARAM_INT);
 			$stmt->execute();
 			$data = $stmt->fetchAll(PDO::FETCH_ASSOC);
