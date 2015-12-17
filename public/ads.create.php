@@ -17,7 +17,7 @@
 		<div class="container center-block">
 	 		<div class="row">
 		 		<div class="col-md-10 col-md-offset-1">
-			 		<form class="form-group" action="controllers/ad_save.php" method="POST" enctype="multipart/form-data">
+			 		<form class="form-group" action="ad_save.php" method="POST" enctype="multipart/form-data">
 			 			<label for="title">Title</label>
 						<input class="form-control" type="text" id="title" name="title" placeholder="Title" required>
 						<label for="desc">Description</label>
