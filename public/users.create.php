@@ -142,6 +142,9 @@ $findError = 'errorFinder';
                     <br>
                     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
                 </form>
+                <?php foreach ($errors as $error) : ?>
+                    <h4 class='errors'>An error has occurred, <?= $error; ?> </h4>
+                <?php endforeach ?>
             </div>
         </div>
     </div>
