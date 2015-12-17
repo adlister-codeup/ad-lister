@@ -84,7 +84,7 @@
                 </div>
                 <div class="col-md-4">
                     <h3><?php echo $data["description"] ?></h3>
-                    <h3><?php echo $data["price"] ?></h3>
+                    <h3>$<?php echo $data["price"] ?></h3>
                     <small><a href="ads.edit.php?ad=<?php echo $data["id"]?>">Edit your listing</a></small>
                 </div>
             </div>

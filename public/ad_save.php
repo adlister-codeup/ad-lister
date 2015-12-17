@@ -22,5 +22,6 @@
 			$add = new AdTable();
 			$add->user ="krieger";
 			$add->addAd($data);
+			header('Location: http://adlister.dev');
 		}
 	}
