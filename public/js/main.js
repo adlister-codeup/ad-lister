@@ -25,11 +25,11 @@
 			$("#ads").append(row);
 			for (var div = 0; div < 3; div++) {
 				if (data[dataLocation].images[0] == "") {
-					data[dataLocation].images[0] = "http://placehold.it/700x400";
+					data[dataLocation].images[0] = "/img/no_image_available.png";
 				}
 				var divopen = $('<div class="col-md-4 portfolio-item">').addClass("divof"+dataLocation);
 				var linkopen = $('<a href="ads.show.php">').attr("href", "ads.show.php?ad="+data[dataLocation].id).addClass("link"+dataLocation);
-				var image = $('<img class="img-responsive" src="http://placehold.it/700x400" alt="">').attr("src", data[dataLocation].images[0]);
+				var image = $('<img class="img-responsive imagefront" src="http://placehold.it/700x400" alt="">').attr("src", data[dataLocation].images[0]);
 				var h3 = $('<h3></h3').addClass("h3of"+dataLocation);
 				var titlelink = $('<a href="ads.show.php"></a>').attr("href", "ads.show.php?ad="+data[dataLocation].id).text(data[dataLocation].title);
 				var desc = $('<p></p>').text(data[dataLocation].description);
