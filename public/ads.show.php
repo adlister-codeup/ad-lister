@@ -4,6 +4,10 @@
     {
         $ad = new AdTable();
         $data =  $ad->loadAd($_GET["ad"]);
+        if ($data["images"][0] == "")
+        {
+            $data["images"][0] = "img/no_image_available.png";
+        }
     }
 ?>
 <!DOCTYPE html>

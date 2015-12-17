@@ -14,7 +14,7 @@
 		public function loadAds($offset, $amount)
 		{
 			$logger = new Log("AdTable", "loadAds", "logs");
-			$logger->info("user is set to: {$this->user}");
+			$logger->info("Offset: {$offset} Amount: {$amount}");
 			$dbc = $this->database();
 			$query = "SELECT id, owner, title, description, email, phone, price, location, images, categories FROM ads LIMIT :limit OFFSET :offset";
 			$stmt = $dbc->prepare($query);
@@ -85,7 +85,6 @@
 		public function loadAd($id)
 		{
 			$logger = new Log("AdTable", "loadAd", "logs");
-			$logger->info("user is set to: {$this->user}");
 			$dbc = $this->database();
 			$query = "SELECT id, owner, title, description, email, phone, price, location, images, categories FROM ads WHERE id=:id";
 			$stmt = $dbc->prepare($query);
