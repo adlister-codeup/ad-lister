@@ -14,13 +14,16 @@ body {
   width: 100%;
   /* Set the fixed height of the footer here */
   height: 60px;
-  background-color: #f5f5f5;
+  background-color: #000000;
 }
 
 
 /* Custom page CSS
 -------------------------------------------------- */
 /* Not required for template or sticky footer method. */
+*{
+  font-family: "Courier New", Courier, monospace; 
+}
 
 body > .container {
   padding: 60px 15px 0;
@@ -47,4 +50,74 @@ code {
 }
 .sign_up {
   font-size: 30px;
+}
+
+a, .navbar-brand{
+  color: #ffffff;
+}
+
+.navbar{
+  background-color: #000000;
+}
+/* Buttons */
+.btn {
+  background: #57d943;
+  background-image: -webkit-linear-gradient(top, #57d943, #03070a);
+  background-image: -moz-linear-gradient(top, #57d943, #03070a);
+  background-image: -ms-linear-gradient(top, #57d943, #03070a);
+  background-image: -o-linear-gradient(top, #57d943, #03070a);
+  background-image: linear-gradient(to bottom, #57d943, #03070a);
+  -webkit-border-radius: 15;
+  -moz-border-radius: 15;
+  border-radius: 15px;
+  text-shadow: 1px 1px 3px #666666;
+  -webkit-box-shadow: 0px 1px 3px #666666;
+  -moz-box-shadow: 0px 1px 3px #666666;
+  box-shadow: 0px 1px 3px #666666;
+  font-family: Courier New;
+  color: #ffffff;
+  font-size: 14px;
+  padding: 7px 18px 7px 18px;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: #3cfc43;
+  background-image: -webkit-linear-gradient(top, #3cfc43, #010301);
+  background-image: -moz-linear-gradient(top, #3cfc43, #010301);
+  background-image: -ms-linear-gradient(top, #3cfc43, #010301);
+  background-image: -o-linear-gradient(top, #3cfc43, #010301);
+  background-image: linear-gradient(to bottom, #3cfc43, #010301);
+  text-decoration: none;
+}
+
+.largebtn {
+  background: #57d943;
+  background-image: -webkit-linear-gradient(top, #57d943, #03070a);
+  background-image: -moz-linear-gradient(top, #57d943, #03070a);
+  background-image: -ms-linear-gradient(top, #57d943, #03070a);
+  background-image: -o-linear-gradient(top, #57d943, #03070a);
+  background-image: linear-gradient(to bottom, #57d943, #03070a);
+  -webkit-border-radius: 15;
+  -moz-border-radius: 15;
+  border-radius: 15px;
+  text-shadow: 1px 1px 3px #666666;
+  -webkit-box-shadow: 0px 1px 3px #666666;
+  -moz-box-shadow: 0px 1px 3px #666666;
+  box-shadow: 0px 1px 3px #666666;
+  font-family: Courier New;
+  color: #ffffff;
+  font-size: 22px;
+  padding: 7px 18px 7px 18px;
+  text-decoration: none;
+}
+
+.largebtn:hover {
+  background: #3cfc43;
+  background-image: -webkit-linear-gradient(top, #3cfc43, #010301);
+  background-image: -moz-linear-gradient(top, #3cfc43, #010301);
+  background-image: -ms-linear-gradient(top, #3cfc43, #010301);
+  background-image: -o-linear-gradient(top, #3cfc43, #010301);
+  background-image: linear-gradient(to bottom, #3cfc43, #010301);
+  text-decoration: none;
 }
