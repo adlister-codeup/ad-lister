@@ -1,6 +1,6 @@
 <?php
-	require_once "../../utils/Log.php";
-	require_once '../../database/private.php';
+	require_once "../utils/Log.php";
+	require_once '../database/private.php';
 
 	class AdTable 
 	{
@@ -14,7 +14,7 @@
 		public function loadAds($offset, $amount)
 		{
 			$logger = new Log("AdTable", "loadAds", "logs");
-			$logger->info("user is set to: {$this->user}");
+			$logger->info("Offset: {$offset} Amount: {$amount}");
 			$dbc = $this->database();
 			$query = "SELECT id, owner, title, description, email, phone, price, location, images, categories FROM ads LIMIT :limit OFFSET :offset";
 			$stmt = $dbc->prepare($query);
@@ -74,7 +74,7 @@
 				$stmt->bindValue(":title", $data["title"], PDO::PARAM_STR);
 				$stmt->bindValue(":description", $data["description"], PDO::PARAM_STR);
 				$stmt->bindValue(":email", $data["email"], PDO::PARAM_STR);
-				$stmt->bindValue(":phone", $data["phone"], PDO::PARAM_INT);
+				$stmt->bindValue(":phone", $data["phone"], PDO::PARAM_STR);
 				$stmt->bindValue(":price", $data["price"], PDO::PARAM_INT);
 				$stmt->bindValue(":location", $data["location"], PDO::PARAM_STR);
 				$stmt->bindValue(":images", $data["images"], PDO::PARAM_STR);
@@ -82,6 +82,18 @@
 				$stmt->execute();
 			unset($logger);
 		}
-
+		public function loadAd($id)
+		{
+			$logger = new Log("AdTable", "loadAd", "logs");
+			$dbc = $this->database();
+			$query = "SELECT id, owner, title, description, email, phone, price, location, images, categories FROM ads WHERE id=:id";
+			$stmt = $dbc->prepare($query);
+			$stmt->bindValue(":id", $id, PDO::PARAM_INT);
+			$stmt->execute();
+			$data = $stmt->fetch(PDO::FETCH_ASSOC);
+			$data["images"] = explode("|", $data["images"]);
+			unset($logger);
+			return $data;
+		}
 	}
 ?>

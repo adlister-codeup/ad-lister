@@ -1,6 +1,6 @@
 <?php
-	require_once "../../utils/Log.php";
-	require_once "../../utils/UUID.php";
+	require_once "../utils/Log.php";
+	require_once "../utils/UUID.php";
 	class SaveImage
 	{
 		protected $source = [];
