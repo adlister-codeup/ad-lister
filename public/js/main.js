@@ -2,7 +2,7 @@
 (function(){
 	$.ajax ({ // get request to load the ads from the database.
 	    type: "POST",
-	    url:"controllers/load_ads.php",
+	    url:"load_ads.php",
 	    data: {
 	    	amount: 12
 	    },
