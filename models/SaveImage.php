@@ -10,9 +10,9 @@
 			$uuidGen = new UUID();
 			$log = new Log("SaveImage", "save", "logs");
 			$target_dir = "uploads/";
-			if (is_dir("../".$target_dir) === false)
+			if (is_dir($target_dir) === false)
 			{
-				mkdir("../{$target_dir}");
+				mkdir($target_dir);
 			}
 			foreach ($images["name"] as $key => $value)
 			{
@@ -39,7 +39,7 @@
 				}
 				if ($uploadOk == 1)
 				{
-					move_uploaded_file($images["tmp_name"][$key], "../".$target_file);
+					move_uploaded_file($images["tmp_name"][$key], $target_file);
 					array_push($this->source, $target_file);	
 					$log->info("{$target_file} was uploaded successfully.");
 				} else 
