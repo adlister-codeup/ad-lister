@@ -1,6 +1,6 @@
 <?php
-	require_once "../../models/AdTable.php";
-	require_once "../../models/SaveImage.php";
+	require_once "../models/AdTable.php";
+	require_once "../models/SaveImage.php";
 	if (isset($_POST["change"]))
 	{
 		if ($_POST["change"] == "add")

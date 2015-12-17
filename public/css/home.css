@@ -48,7 +48,13 @@ code {
   margin-right: auto;
   width: 600px;
 }
-.sign_up {
+
+.imagefront {
+  height: 200px;
+  width: 300px;
+  position: center;
+
+.sign_up
   font-size: 30px;
 }
 
@@ -121,3 +127,4 @@ a, .navbar-brand{
   background-image: linear-gradient(to bottom, #3cfc43, #010301);
   text-decoration: none;
 }
+
