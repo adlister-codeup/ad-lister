@@ -15,8 +15,8 @@
     </div>
   </div>        
   <div class="container center-block">
-    <form class="form-signin">
-      <h4 class="form-signin-heading">New? <a href="users.create.php">Sign up!</a></h4>
+    <form class="form-signin signup">
+      <h4 class="form-signin-heading">New? <button type="button" class="btn"><a href="users.create.php">Sign up!</a></button></h4>
         <label for="inputEmail" class="sr-only">Email address</label>
         <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
         <label for="inputPassword" class="sr-only">Password</label>
@@ -26,7 +26,7 @@
             <input type="checkbox" value="remember-me"> Remember me
           </label>
         </div>
-            <button class="btn btn-success">Login</button>   
+            <button class="largebtn">Login</button>   
   </div>
 </body>
 </html
