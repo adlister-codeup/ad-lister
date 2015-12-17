@@ -13,7 +13,7 @@ class BaseModel {
         self::dbConnect();
     }
 
-    private static function dbConnect()
+    protected static function dbConnect()
     {
         if (!self::$dbc)
         {

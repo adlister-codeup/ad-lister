@@ -3,6 +3,8 @@ require_once '../utils/Input.php';
 require_once '../utils/Log.php';
 $logger = new Log("users.create.php","signup", "logs");
 require_once '../models/User.php';
+
+
 $errors = [];
 if (!empty($_POST)) {
      try {
@@ -46,9 +48,27 @@ if (!empty($_POST)) {
         $errors['gender'] = $e->getMessage();
     }
     var_dump($errors);
+    $user = new User;
+    try {
+        if ($user->checkUsername($userName)) {
+            throw new Exception("Username has been taken");
+        }
+    } catch (Exception $e) {
+        if ($userName != NULL) {
+            $errors['username'] = $e->getMessage();
+        }
+    }
+     try {
+        if ($user->checkEmail($email)) {
+            throw new Exception("Email has been taken");
+        }
+    } catch (Exception $e) {
+        if ($email != NULL) {
+            $errors['email'] = $e->getMessage();
+        }
+    }
     if (empty($errors)) {
     $formattedDate = $dateTimeObject->format('Y-m-d');
-        $user = new User;
         $user->username = $userName;
         $user->first_name = $firstName;
         $user->last_name = $lastName;
@@ -88,23 +108,29 @@ $findError = 'errorFinder';
                     <div class="row">
                         <div class="col-xs-6 col-md-6">
                             <label class='sign_up' name='register'>Register</label>
-                            <input class="form-control" id='username' name="username" placeholder="Enter a UserName" type="text" value='<?= isset($_POST['username']) && empty($errors['username'])? $_POST['username']: ''?>'
+                            <input class="form-control" id='username' name="username" placeholder="Enter a UserName" type="text" 
+                            value='<?= isset($_POST['username']) && empty($errors['username'])? $_POST['username']: ''?>'
                                 required autofocus><br>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-6 col-md-6">
-                            <input class="form-control" id='firstname' name="firstname" placeholder="First Name" type="text" value='<?= isset($_POST['firstname']) && empty($errors['firstname'])? $_POST['firstname']: ''?>'
+                            <input class="form-control" id='firstname' name="firstname" placeholder="First Name" type="text" 
+                            value='<?= isset($_POST['firstname']) && empty($errors['firstname'])? $_POST['firstname']: ''?>'
                                 required autofocus><br>
                         </div>
                         <div class="col-xs-6 col-md-6">
-                            <input class="form-control" id='lastname' name="lastname" placeholder="Last Name" type="text" value='<?= isset($_POST['lastname']) && empty($errors['lastname'])? $_POST['lastname']: ''?>'><br>
+                            <input class="form-control" id='lastname' name="lastname" placeholder="Last Name" type="text" 
+                            value='<?= isset($_POST['lastname']) && empty($errors['lastname'])? $_POST['lastname']: ''?>'><br>
                         </div>
                     </div>
-                    <input class="form-control" id='email' name="email" placeholder="Your Email" type="email" value='<?= isset($_POST['email']) && empty($errors['email'])? $_POST['email']: ''?>'><br>
-                    <input class="form-control" id ='password' name="password" placeholder="New Password" type="password" value='<?= isset($_POST['password']) && empty($errors['password'])? $_POST['password']: ''?>'><br>
-                    <input class="form-control" id='confirm_password' name="confirm_password" placeholder="Re-enter Password" type="password" value='<?= isset($_POST['confirm_password']) && empty($errors['confirm_password'])? $_POST['confirm_password']: ''?>'><br>
-                    <input class="form-control" name="birth_date" placeholder="Birthday" type="text" value='<?= isset($_POST['birth_date']) && empty($errors['birth_date'])? $_POST['birth_date']: ''?>'>
+                    <input class="form-control" id='email' name="email" placeholder="Your Email" type="email" 
+                    value='<?= isset($_POST['email']) && empty($errors['email'])? $_POST['email']: ''?>'><br>
+                    <input class="form-control" id ='password' name="password" placeholder="New Password" type="password" 
+                    value='<?= isset($_POST['password']) && empty($errors['password'])? $_POST['password']: ''?>'><br>
+                    <input class="form-control" id='confirm_password' name="confirm_password" placeholder="Re-enter Password" type="password"><br>
+                    <input class="form-control" name="birth_date" placeholder="Birthday" type="text" 
+                    value='<?= isset($_POST['birth_date']) && empty($errors['birth_date'])? $_POST['birth_date']: ''?>'>
                     <label class="radio-inline">
                         <input type="radio" name="gender" id="inlineCheckbox1" value="male">
                         Male
@@ -121,11 +147,11 @@ $findError = 'errorFinder';
     </div>
  <script>
 $(document).ready(function() {
-        $.validator.setDefaults({
-            submitHandler: function() {
-                form.submit();
-            }
-        });
+    $.validator.setDefaults({
+        submitHandler: function() {
+            form.submit();
+        }
+    });
 
     $("#signup").validate({
             rules: {
