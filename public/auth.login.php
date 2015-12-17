@@ -9,10 +9,14 @@
   <?php include '../views/partials/navbar.php'; ?>
 </head>
 <body>
-    <div class="container center-block">
-      <form class="form-signin">
-        <h2 class="form-signin-heading">Please sign in</h2>
-        <h3 class="form-signin-heading">New? <a href="users.create.php">Sign up!</a></h3>
+  <div class="container">
+    <div class="page-header">
+      <h2>Login</h2>
+    </div>
+  </div>        
+  <div class="container center-block">
+    <form class="form-signin">
+      <h4 class="form-signin-heading">New? <a href="users.create.php">Sign up!</a></h4>
         <label for="inputEmail" class="sr-only">Email address</label>
         <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
         <label for="inputPassword" class="sr-only">Password</label>
@@ -22,8 +26,7 @@
             <input type="checkbox" value="remember-me"> Remember me
           </label>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-      </form>
-    </div>
+            <button class="btn btn-success">Login</button>   
+  </div>
 </body>
 </html
