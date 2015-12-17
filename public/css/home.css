@@ -65,6 +65,10 @@ a, .navbar-brand{
 .navbar{
   background-color: #000000;
 }
+
+.signup {
+  color: #000000;
+}
 /* Buttons */
 .btn {
   background: #57d943;
