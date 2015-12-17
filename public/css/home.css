@@ -45,8 +45,11 @@ code {
   margin-right: auto;
   width: 600px;
 }
+
 .imagefront {
   height: 200px;
   width: 300px;
   position: center;
-}
+
+.sign_up
+  font-size: 30px;
