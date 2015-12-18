@@ -1,10 +1,13 @@
 "use strict";
 (function(){
+	var Onpage = 1;
+	var amount = 12;
+	var morePages;
 	$.ajax ({ // get request to load the ads from the database.
 	    type: "POST",
 	    url:"load_ads.php",
 	    data: {
-	    	amount: 12
+	    	amount: amount
 	    },
 	    dataType: "json",
 	    success: function(data) {
@@ -18,8 +21,15 @@
 	function fillAds(data) {
 		console.log(data);
 		var length = data.length;
+		if(length < amount) {
+			morePages = false
+		}
+		else {
+			morePages = true;
+		}
 		var rows = length / 3;
 		var dataLocation = 0;
+		$("#ads").html("");
 		for (var rowplace = 0; rowplace < rows; rowplace++) {
 			var row = $('<div class="row">').addClass("rowplace"+rowplace);
 			$("#ads").append(row);
@@ -48,13 +58,28 @@
 			}
 		}
 	}
+	function nextpage() {
+		if (morePages) {
+			Onpage = Onpage + 1;
+			console.log(Onpage);
+			pageChange(Onpage);
+			console.log("next");
+		}
+	}
+	function prevpage() {
+		if (Onpage > 1) {
+			Onpage = Onpage - 1;
+			pageChange(Onpage);
+			console.log("prev");
+		}
+	}
 	function pageChange(page) {
 		$.ajax ({
 	    type: "POST",
-	    url:"controllers/load_ads.php",
+	    url:"load_ads.php",
 	    data: {
 	    	page: page,
-	    	amount: 12
+	    	amount: amount
 	    },
 	    dataType: "json",
 	    success: function(data) {
@@ -66,4 +91,6 @@
 	    }
 	});
 	}
+	document.getElementById("nextbtn").addEventListener("click", nextpage);
+	document.getElementById("prevbtn").addEventListener("click", prevpage);
 })();

@@ -40,7 +40,7 @@
 		{
 			$logger = new Log("AdTable", "addAd", "logs");
 			$logger->info("owner is set to: {$this->user}");
-			$data = parse($data);
+			$data = $this->parse($data);
 			$dbc = $this->database();
 			$query = "INSERT into ads (owner, title, description, email, phone, price, location, images, categories) VALUES (:owner, :title, :description, :email, :phone, :price, :location, :images, :categories)";
 				$stmt = $dbc->prepare($query);
