@@ -1,0 +1,2 @@
+[loadAds] 2015-12-17 08:56:49 [INFO] user is set to: 
+[loadAds] 2015-12-17 09:28:05 [INFO] user is set to: 

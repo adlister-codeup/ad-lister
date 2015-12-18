@@ -60,7 +60,7 @@ if (!empty($_POST)) {
     }
      try {
         if ($user->checkEmail($email)) {
-            throw new Exception("Email has been taken");
+            throw new Exception("Email is already in use");
         }
     } catch (Exception $e) {
         if ($email != NULL) {
@@ -108,7 +108,8 @@ $findError = 'errorFinder';
                     <div class="row">
                         <div class="col-xs-6 col-md-6">
                             <label class='sign_up' name='register'>Register</label>
-                            <input class="form-control" id='username' name="username" placeholder="Enter a UserName" type="text" 
+                            <input class="form-control" id='<?= empty($errors['username'])? 'username' : $findError ?>' name="username" 
+                            placeholder='<?= empty($errors['username']) ? "Enter your username": "Error: " . $errors['username']?>' type="text" 
                             value='<?= isset($_POST['username']) && empty($errors['username'])? $_POST['username']: ''?>'
                                 required autofocus><br>
                         </div>
@@ -124,13 +125,18 @@ $findError = 'errorFinder';
                             value='<?= isset($_POST['lastname']) && empty($errors['lastname'])? $_POST['lastname']: ''?>'><br>
                         </div>
                     </div>
-                    <input class="form-control" id='email' name="email" placeholder="Your Email" type="email" 
+                    <input class="form-control" id='<?= empty($errors['email'])? 'email' : $findError ?>' name="email" 
+                    placeholder='<?= empty($errors['email']) ? "Enter your Email": "Error: " . $errors['email']?>' type="email" 
                     value='<?= isset($_POST['email']) && empty($errors['email'])? $_POST['email']: ''?>'><br>
+
                     <input class="form-control" id ='password' name="password" placeholder="New Password" type="password" 
                     value='<?= isset($_POST['password']) && empty($errors['password'])? $_POST['password']: ''?>'><br>
+
                     <input class="form-control" id='confirm_password' name="confirm_password" placeholder="Re-enter Password" type="password"><br>
-                    <input class="form-control" name="birth_date" placeholder="Birthday" type="text" 
+                    <input class="form-control" id='<?= empty($errors['birth_date'])? 'birth_date' : $findError ?>'name="birth_date" 
+                    placeholder='<?= empty($errors['birth_date']) ? "Enter birth date": "Error: " . $errors['birth_date']?>'type="text" 
                     value='<?= isset($_POST['birth_date']) && empty($errors['birth_date'])? $_POST['birth_date']: ''?>'>
+
                     <label class="radio-inline">
                         <input type="radio" name="gender" id="inlineCheckbox1" value="male">
                         Male
@@ -154,40 +160,40 @@ $(document).ready(function() {
     });
 
     $("#signup").validate({
-            rules: {
-                firstname: "required",
-                lastname: "required",
-                password: {
-                    required: true,
-                    minlength: 5
-                },
-                confirm_password: {
-                    required: true,
-                    minlength: 5,
-                    equalTo: "#password"
-                },
-                email: {
-                    required: true,
-                    email: true
-                },
+        rules: {
+            firstname: "required",
+            lastname: "required",
+            password: {
+                required: true,
+                minlength: 5
             },
-            messages: {
-                firstname: "Please enter your first name",
-                lastname: "Please enter your last name",
-                password: {
-                    required: "Please enter a password",
-                    minlength: "Password must be atleast 5 letters"
-                },
-                confirm_password: {
-                    required: "Please confirm password",
-                    minlength: "Password must be atleast 5 letters",
-                    equalTo: "Must be equal to password"
-                },
-                email: {
-                    required: "Please enter a email",
-                    email: "Your email address must be in the format of name@domain.com"
-                },
-            }
+            confirm_password: {
+                required: true,
+                minlength: 5,
+                equalTo: "#password"
+            },
+            email: {
+                required: true,
+                email: true
+            },
+        },
+        messages: {
+            firstname: "Please enter your first name",
+            lastname: "Please enter your last name",
+            password: {
+                required: "Please enter a password",
+                minlength: "Password must be atleast 5 letters"
+            },
+            confirm_password: {
+                required: "Please confirm password",
+                minlength: "Password must be atleast 5 letters",
+                equalTo: "Must be equal to password"
+            },
+            email: {
+                required: "Please enter a email",
+                email: "Your email address must be in the format of name@domain.com"
+            },
+        }
     });
 });
 
