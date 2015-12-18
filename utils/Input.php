@@ -1,5 +1,4 @@
 <?php 
-require_once '../public/users.create.php';
 class DateRangeException extends Exception { }
 class Input
 {

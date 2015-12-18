@@ -1,3 +1,27 @@
+<?php
+require '../utils/Auth.php';
+require '../utils/input.php';
+session_start();
+$sessionId = session_id();
+
+
+if (Auth::check()) {
+  header("Location: /index.php");
+  die();
+} 
+$loginFail = false;
+$username = Input::get('username');
+$password = Input::get('password');
+
+if (Auth::attempt($username,$password)) {
+  header("Location: /index.php");
+  die();
+} else if ($username !== null && $password !== null) {
+  $loginFail = true;
+} 
+$_SESSION['IS_LOGGED_IN'] = false;
+?>
+?>
 <!DOCTYPE html>
 
 <head>
@@ -11,7 +35,11 @@
 <body>
   <div class="container">
     <div class="page-header">
-      <h2>Login</h2>
+      <?php if (!$loginFail): ?>
+        <h3>Input Info:</h3>
+      <?php else: ?>
+        <h1>Login Failed...Try Again</h1>
+      <?php endif; ?>
     </div>
   </div>        
   <div class="container center-block">

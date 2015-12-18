@@ -111,7 +111,7 @@ $findError = 'errorFinder';
                             <label class='sign_up' name='register'>Register</label>
                             <input class="form-control" id='<?= empty($errors['username'])? 'username' : $findError ?>' name="username" 
                             placeholder='<?= empty($errors['username']) ? "Enter your username": "Error: " . $errors['username']?>' type="text" 
-                            value='<?= isset($_POST['username']) && empty($errors['username'])? $_POST['username']: ''?>'
+                            value='<?= (Input::has('username')) && empty($errors['username'])? Input::get('username'): ''?>'
                                 required autofocus><br>
                         </div>
                     </div>

@@ -1,10 +1,10 @@
 <?php
-require_once 'log.php';
+require_once 'Log.php';
 class Auth 
 {
 	
 	public static $logFail = false;
-	public static $hashed_password = '$2y$10$SLjwBwdOVvnMgWxvTI4Gb.YVcmDlPTpQystHMO2Kfyi/DS8rgA0Fm';
+	public static $hash = '$2y$10$SLjwBwdOVvnMgWxvTI4Gb.YVcmDlPTpQystHMO2Kfyi/DS8rgA0Fm';
 	public static $logger;
 
 	public static function getLog() 
@@ -21,10 +21,8 @@ class Auth
 		{
 			$_SESSION['IS_LOGGED_IN'] = $username;
 			var_dump($username);
-			$logger->logInfo("User $username logged in");
 			return true;
 		} else {
-			$logger->logError("User $username invalid info!");
 			return false;
 		}
 	}
