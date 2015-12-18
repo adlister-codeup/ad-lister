@@ -1,6 +1,6 @@
 <?php
 require_once '../bootstrap.php';
-require_once '../database/private.php';
+
 $limit    = 12;
 $pageID   = Input::has('page') ? Input::get('page') : 1;
 $offset   = $limit * $pageID - $limit;
@@ -11,7 +11,7 @@ $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
 $stmt->execute();
 
 $count    = $dbc->query('SELECT COUNT(*) FROM ads;')->fetchColumn();
-$ads    = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$ads      = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $numPages = ceil($count / $limit);
 $next     = $pageID + 1;
 $previous = $pageID -1;
