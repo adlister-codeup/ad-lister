@@ -1,22 +1,3 @@
-    <?php
-    // require_once '../bootstrap.php';
-
-    // $limit    = 12;
-    // $pageID   = Input::has('page') ? Input::get('page') : 1;
-    // $offset   = $limit * $pageID - $limit;
-
-    // $stmt = $dbc->prepare("SELECT * FROM ads LIMIT :limit OFFSET :offset");
-    // $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
-    // $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
-    // $stmt->execute();
-
-    // $count    = $dbc->query('SELECT COUNT(*) FROM ads;')->fetchColumn();
-    // $ads      = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    // $numPages = ceil($count / $limit);
-    // $next     = $pageID + 1;
-    // $previous = $pageID -1;
-    ?>
-
 
 <!DOCTYPE html>
 <body>
@@ -80,10 +61,10 @@
         <nav>
         <ul class="pager">
             <li class="previous">
-                <button id="prevbtn" class="btn-default">Previous</button>
+                <button id="prevbtn" class="largebtn">Previous</button>
           
             <li class="next">
-                <button id="nextbtn" class="btn-default">Next</button>
+                <button id="nextbtn" class="largebtn">Next</button>
         </ul>
     </nav>
 </body>
