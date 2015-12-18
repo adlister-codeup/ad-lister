@@ -8,6 +8,19 @@
         {
             $data["images"][0] = "img/no_image_available.png";
         }
+        if ($data["phone"] != "")
+        {
+            if (strlen($data["phone"]) == 7)
+            {
+                $data["phone"] = substr($data["phone"], 0, 3)."-".substr($data["phone"], 0, 4);
+            } else if (strlen($data["phone"]) == 10)
+            {
+                $data["phone"] = substr($data["phone"], 0, 3)."-".substr($data["phone"], 0, 3)."-".substr($data["phone"], 0, 4);
+            } else if (strlen($data["phone"]) == 11)
+            {
+                $data["phone"] = substr($data["phone"], 0, 1)." ".substr($data["phone"], 0, 3)."-".substr($data["phone"], 0, 3)."-".substr($data["phone"], 0, 4);
+            }
+        }
     }
 ?>
 <!DOCTYPE html>
@@ -83,9 +96,14 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <h3><?php echo $data["description"] ?></h3>
                     <h3>$<?php echo $data["price"] ?></h3>
                     <small><a href="ads.edit.php?ad=<?php echo $data["id"]?>">Edit your listing</a></small>
+                    <h3>Contact email: <p><?php echo $data["email"] ?></p></h3>
+                    <?php if ($data["phone"] != "") { ?>
+                        <h3>Contact Phone: <p><?php echo $data["phone"] ?></p></h3>
+                    <?php } ?>
+                    <hr>
+                    <h3><p><?php echo $data["description"] ?></p></h3>
                 </div>
             </div>
                 <hr>

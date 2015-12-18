@@ -32,7 +32,7 @@
 				var image = $('<img class="img-responsive imagefront" src="http://placehold.it/700x400" alt="">').attr("src", data[dataLocation].images[0]);
 				var h3 = $('<h3></h3').addClass("h3of"+dataLocation);
 				var titlelink = $('<a href="ads.show.php"></a>').attr("href", "ads.show.php?ad="+data[dataLocation].id).text(data[dataLocation].title);
-				var desc = $('<p></p>').text(data[dataLocation].description);
+				var desc = $('<p></p>').text(data[dataLocation].description.substring(0, 256));
 				$(".rowplace"+rowplace).append(divopen);
 				$(".divof"+dataLocation).append(linkopen);
 				$(".link"+dataLocation).append(image);

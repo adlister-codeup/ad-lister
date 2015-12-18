@@ -23,7 +23,7 @@
 						<label for="desc">Description</label>
 						<textarea class="form-control" type="text" id="desc" name="description" placeholder="Description"></textarea>
 						<label for="img">Images</label>
-						<input type="file" name="images[]" id="img" multiple>
+						<input type="file" name="images[]" id="img" accept="image/*" multiple>
 						<label for="email">Email</label>
 						<input class="form-control" type="email" id="email" name="email" placeholder="email@email.email" required>
 						<label for="phone">Phone</label>
