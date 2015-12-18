@@ -2,7 +2,7 @@
 
 require_once '../database/private.php';
 
-class BaseModel {
+class Model {
 
     protected static $dbc;
     protected static $table;
@@ -56,6 +56,7 @@ class BaseModel {
             VALUES (' .  $valuesString . ')';
             $this->bindQuery($query);
     }
+
     protected function update() 
     {
         $updatedArray = [];
@@ -80,6 +81,7 @@ class BaseModel {
             $this->insert();
         }
     }
+
     public function delete($id) 
     {
 
@@ -92,6 +94,7 @@ class BaseModel {
             $stmt->bindValue(':id', $id, PDO::PARAM_STR);
             $stmt->execute();
     }
+
     public static function find($id)
     {
         // Get connection to the database

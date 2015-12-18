@@ -14,7 +14,7 @@ $table = "CREATE TABLE IF NOT EXISTS users (
 		last_name VARCHAR(75) NOT NULL,
 		email VARCHAR(150) UNIQUE NOT NULL,
 		birth_date DATE NOT NULL,
-		GENDER CHAR(6) NOT NULL,
+		GENDER CHAR(6),
 		PRIMARY KEY (id)
 	)";
 $dbc->exec($table);
