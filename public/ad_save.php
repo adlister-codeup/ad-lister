@@ -5,7 +5,7 @@
 	{
 		if ($_POST["change"] == "add")
 		{
-			if (isset($_FILES["images"]))
+			if (!empty($_FILES["images"]))
 			{
 				$images = $_FILES["images"];
 				$saveImage = new SaveImage();
