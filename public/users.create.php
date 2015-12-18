@@ -48,6 +48,7 @@ if (!empty($_POST)) {
         $errors['gender'] = $e->getMessage();
     }
     var_dump($errors);
+
     $user = new User;
     try {
         if ($user->checkUsername($userName)) {
@@ -72,7 +73,7 @@ if (!empty($_POST)) {
         $user->username = $userName;
         $user->first_name = $firstName;
         $user->last_name = $lastName;
-        $user->hash = hash('sha256',$confirmPassword);
+        $user->hash = password_hash($confirmPassword,PASSWORD_BCRYPT);
         $user->email = $email;
         $user->birth_date = $formattedDate;
         $user->gender = $gender;
@@ -117,25 +118,25 @@ $findError = 'errorFinder';
                     <div class="row">
                         <div class="col-xs-6 col-md-6">
                             <input class="form-control" id='firstname' name="firstname" placeholder="First Name" type="text" 
-                            value='<?= isset($_POST['firstname']) && empty($errors['firstname'])? $_POST['firstname']: ''?>'
+                            value='<?= (Input::has('firstname')) && empty($errors['firstname'])? Input::get('firstname'): ''?>'
                                 required autofocus><br>
                         </div>
                         <div class="col-xs-6 col-md-6">
                             <input class="form-control" id='lastname' name="lastname" placeholder="Last Name" type="text" 
-                            value='<?= isset($_POST['lastname']) && empty($errors['lastname'])? $_POST['lastname']: ''?>'><br>
+                            value='<?= (Input::has('lastname')) && empty($errors['lastname'])? Input::get('lastname'): ''?>'><br>
                         </div>
                     </div>
                     <input class="form-control" id='<?= empty($errors['email'])? 'email' : $findError ?>' name="email" 
                     placeholder='<?= empty($errors['email']) ? "Enter your Email": "Error: " . $errors['email']?>' type="email" 
-                    value='<?= isset($_POST['email']) && empty($errors['email'])? $_POST['email']: ''?>'><br>
+                    value='<?= (Input::has('email')) && empty($errors['email'])? Input::get('email'): ''?>'><br>
 
                     <input class="form-control" id ='password' name="password" placeholder="New Password" type="password" 
-                    value='<?= isset($_POST['password']) && empty($errors['password'])? $_POST['password']: ''?>'><br>
+                    value='<?= (Input::has('password')) && empty($errors['password'])? Input::get('password'): ''?>'><br>
 
                     <input class="form-control" id='confirm_password' name="confirm_password" placeholder="Re-enter Password" type="password"><br>
                     <input class="form-control" id='<?= empty($errors['birth_date'])? 'birth_date' : $findError ?>'name="birth_date" 
                     placeholder='<?= empty($errors['birth_date']) ? "Enter birth date": "Error: " . $errors['birth_date']?>'type="text" 
-                    value='<?= isset($_POST['birth_date']) && empty($errors['birth_date'])? $_POST['birth_date']: ''?>'>
+                    value='<?= (Input::has('birth_date')) && empty($errors['birth_date'])? Input::get('birth_date'): ''?>'>
 
                     <label class="radio-inline">
                         <input type="radio" name="gender" id="inlineCheckbox1" value="male">
