@@ -63,13 +63,12 @@ class Input
             throw new OutOfRangeException("Please enter a value");
         } else if ($date > $max || $date < $min) {
             throw new DateRangeException("Date is either too short or too big");
-        } 
-        try {
-            $date = new DateTime(self::get($key));
-            return $date;
-        } catch (Exception $e) {
+        } else if ($date == false) {
             throw new Exception("Please enter a valid date");
+        } else {  
+            return $date;
         }
+       
     }
 
     ///////////////////////////////////////////////////////////////////////////

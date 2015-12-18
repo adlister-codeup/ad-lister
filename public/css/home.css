@@ -15,7 +15,9 @@ body {
   height: 60px;
   background-color: #000000;
 }
-
+#errorFinder {
+  background-color: yellow;
+}
 
 /* Custom page CSS
 -------------------------------------------------- */
