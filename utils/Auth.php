@@ -1,10 +1,10 @@
 <?php
 require_once 'Log.php';
+require_once '../models/User.php';
 class Auth 
 {
 	
 	public static $logFail = false;
-	public static $hash = '$2y$10$SLjwBwdOVvnMgWxvTI4Gb.YVcmDlPTpQystHMO2Kfyi/DS8rgA0Fm';
 	public static $logger;
 
 	public static function getLog() 
@@ -16,19 +16,29 @@ class Auth
 	}
 	public static function attempt($username, $password) 
 	{
+		$errors = [];
+		$user = new User;
+		try{ 
+			$data = $user->checkUser($username);
+		} catch (Exception $e) {
+			$errors[] = $e->getMessage();
+		}
 		$logger = self::getLog();
-		if ($username == 'guest' && password_verify($password, self::$hashed_password)) 
-		{
-			$_SESSION['IS_LOGGED_IN'] = $username;
-			var_dump($username);
-			return true;
-		} else {
-			return false;
+		if (empty($errors)) {
+			if (password_verify($password, $data['hash'])) 
+			{
+				session_start();
+				$_SESSION['user'] = $username;
+				var_dump($username);
+				return true;
+			} else {
+				return false;
+			}
 		}
 	}
 	public static function check()
 	{
-		if (isset($_SESSION['IS_LOGGED_IN']) && $_SESSION['IS_LOGGED_IN']) 
+		if (isset($_SESSION['user']) && $_SESSION['user']) 
 		{
 			return true;
 		} 
@@ -36,9 +46,9 @@ class Auth
 	}
 	public static function user() 
 	{
-		if (isset($_SESSION['IS_LOGGED_IN'])) 
+		if (isset($_SESSION['user'])) 
 		{
-			return $_SESSION['IS_LOGGED_IN'];
+			return $_SESSION['user'];
 		} 
 	}
 	public static function logOut() 
