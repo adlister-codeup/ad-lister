@@ -160,3 +160,6 @@ a, .navbar-brand, h1, p{
 .well{
   color: #000000;
 }
+.description {
+  word-wrap: break-word;
+}
