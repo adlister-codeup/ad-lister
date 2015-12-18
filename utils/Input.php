@@ -58,7 +58,11 @@ class Input
 
     public static function getDate($key, $min = null , $max = null) 
     {
-        $date = new DateTime(self::get($key));
+        try {
+         $date = new DateTime(self::get($key));
+        } catch (Exception $e) {
+            throw new Exception("Please enter a valid date");
+        }
         if (empty(self::get($key))) {
             throw new OutOfRangeException("Please enter a value");
         } else if ($date > $max || $date < $min) {

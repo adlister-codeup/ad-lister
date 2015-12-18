@@ -17,6 +17,7 @@ body {
 }
 #errorFinder {
   background-color: yellow;
+  color: red;
 }
 
 /* Custom page CSS
