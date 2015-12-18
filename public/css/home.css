@@ -154,6 +154,6 @@ a, .navbar-brand, h1, p{
   text-decoration: none;
 }
 
-.col-md-4{
-
+.well{
+  color: #000000;
 }
