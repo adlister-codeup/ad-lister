@@ -1,14 +1,19 @@
 <?php
 		require_once "../models/AdTable.php";
+		session_start();
+		$ads = new AdTable();
+		if (isset($_POST["title"]) && isset($_SESSION["user"]) && isset($_GET["ad"]))
+		{
+			$ads->user = $_SESSION["user"];
+			$ads->editAd($_POST, $_GET["ad"]);
+		}
 		if (isset($_GET["ad"]))
 		{
-			session_start();
 			if (isset($_SESSION["user"]))
 			{
-				$load = new AdTable();
 				try
 				{
-					$ad = $load->loadAd($_GET["ad"]);
+					$ad = $ads->loadAd($_GET["ad"]);
 				} catch (Exception $e)
 				{
 					echo "Invalid Ad id.";
@@ -44,7 +49,7 @@
   	<link rel="stylesheet" href="../css/home.css">
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   	<title>Krieger's List</title>
-  	<?php include '../views/partials/navbar.php'; ?>
+  	<?php //include '../views/partials/navbar.php'; ?>
   	<div class="container">
     	<div class="page-header">
    			<h2>Edit your listing</h2>
@@ -54,21 +59,23 @@
 	<body>
 	 		<div class="row">
 		 		<div class="col-md-10 col-md-offset-1">
-			 		<form class="form-group">
+			 		<form class="form-group" action='#' method='POST'>
 			 			<label for="title">Current Title</label>
-						<input class="form-control" type="text" id="title" placeholder="Title" value="<?=$title?>" required>
+						<input class="form-control" name="title" type="text" id="title" placeholder="Title" value="<?=$title?>" required>
 						<label for="desc">Current Description</label>
-						<textarea class="form-control" type="text" id="desc" placeholder="Description"><?=$description?></textarea>
-						<button><a href="http://adlister.dev/image_edit.php">Change Images</a></button>
+						<textarea class="form-control" name="description" type="text" id="desc" placeholder="Description"><?=$description?></textarea>
+						<button class="btn btn-default"><a href="http://adlister.dev/image_edit.php">Change Images</a></button>
 						<br>
 						<label for="email">Contact Email</label>
-						<input class="form-control" type="email" id="email" placeholder="email@email.email" value="<?=$email?>" required>
+						<input class="form-control" name="email" type="email" id="email" placeholder="email@email.email" value="<?=$email?>" required>
 						<label for="phone">Phone</label>
-						<input class="form-control" type="tel" id="phone" placeholder="Enter Phone Number" value="<?=$phone?>">
+						<input class="form-control" name="phone" type="tel" id="phone" placeholder="Enter Phone Number" value="<?=$phone?>">
 						<label for="price">Price $</label>
-						<input class="form-control" type="number" id="price" placeholder="0.00" value="<?=$price?>" required>
+						<input class="form-control" name="price" type="number" id="price" placeholder="0.00" value="<?=$price?>" required>
 						<label for="location">Location</label>
-						<input class="form-control" type="text" id="location" placeholder="san antonio" value="<?=$location?>">
+						<input class="form-control" name="location" type="text" id="location" placeholder="san antonio" value="<?=$location?>">
+						<label for="location">Categories</label>
+						<input class="form-control" name="categories" type="text" id="categories" placeholder="toys, robotic, etc" value="<?=$categories?>">
 						<br>
 						<button class="btn btn-default" type ="reset">Clear</button>
 						<button class="btn btn-success">Update listing</button>

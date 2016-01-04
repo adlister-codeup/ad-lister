@@ -96,7 +96,7 @@
 		{
 			$logger = new Log("AdTable", "editAd", "logs");
 			$logger->info("owner is set to: {$this->user}");
-			$data = parse($data);
+			$data = $this->parse($data);
 			$dbc = $this->database();
 			$query = "UPDATE ads SET title=:title, description=:description, email=:email, phone=:phone, price=:price, location=:location, categories=:categories WHERE id = :adId AND owner=:user";
 				$stmt = $dbc->prepare($query);
@@ -110,6 +110,7 @@
 				$stmt->bindValue(":location", $data["location"], PDO::PARAM_STR);
 				$stmt->bindValue(":categories", $data["categories"], PDO::PARAM_STR);
 				$stmt->execute();
+			$logger->info("ad updated");
 			unset($logger);
 		}
 		public function loadAd($id)
