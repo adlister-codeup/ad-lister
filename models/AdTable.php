@@ -40,15 +40,15 @@
 		{
 			if (strlen($data["phone"]) == 7 )
 			{
-				$data["phone"] = substr($data["phone"], 1, 3)."-".substr($data["phone"], 4, 4);
+				$data["phone"] = substr($data["phone"], 0, 3)."-".substr($data["phone"], 3, 4);
 			}
 			elseif (strlen($data["phone"]) == 10)
 			{
-				$data["phone"] = "(".substr($data["phone"], 1, 3).")".substr($data["phone"], 4, 3)."-".substr($data["phone"], 7, 4);
+				$data["phone"] = "(".substr($data["phone"], 0, 3).")".substr($data["phone"], 3, 3)."-".substr($data["phone"], 6, 4);
 			}
 			elseif (strlen($data["phone"]) == 11)
 			{
-				$data["phone"] = substr($data["phone"], 1, 1)."+ (".substr($data["phone"], 2, 3).")".substr($data["phone"], 5, 3)."-".substr($data["phone"], 8, 4);
+				$data["phone"] = substr($data["phone"], 0, 1)."+ (".substr($data["phone"], 1, 3).")".substr($data["phone"], 4, 3)."-".substr($data["phone"], 7, 4);
 			}
 			return $data;
 		}

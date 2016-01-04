@@ -6,6 +6,7 @@
 		{
 			$ads->user = $_SESSION["user"];
 			$ads->editAd($_POST, $_GET["ad"]);
+			header("Location: http://adlister.dev/ads.show.php?ad={$_GET["ad"]}");
 		}
 		if (isset($_GET["ad"]))
 		{
@@ -49,7 +50,7 @@
   	<link rel="stylesheet" href="../css/home.css">
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   	<title>Krieger's List</title>
-  	<?php //include '../views/partials/navbar.php'; ?>
+  	<?php include '../views/partials/navbar.php'; ?>
   	<div class="container">
     	<div class="page-header">
    			<h2>Edit your listing</h2>
