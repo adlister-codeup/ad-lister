@@ -1,4 +1,5 @@
 <?php
+    session_start();
     require_once "../models/AdTable.php";
     if (isset($_GET["ad"]))
     {
