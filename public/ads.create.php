@@ -34,7 +34,35 @@
 						<label for="location">Location</label>
 						<input class="form-control" type="text" id="location" name="location" placeholder="san antonio">
 						<label for="categories">Categories</label>
-						<input class="form-control" type="text" id="categories" name="categories" placeholder="pizza, legs, bionic">
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" value="automobiles"> Automobiles
+								</label>
+								<label>
+									<input type="checkbox" value="bionicparts"> Bionic Parts
+								</label>
+								<label>
+									<input type="checkbox" value="blackmarket"> Black Market
+								</label>
+								<label>
+									<input type="checkbox" value="education"> Education
+								</label>
+								<label>
+									<input type="checkbox" value="jobs"> Jobs
+								</label>
+								<label>
+									<input type="checkbox" value="pets"> pets
+								</label>
+								<label>
+									<input type="checkbox" value="homes"> Homes
+								</label>
+								<label>
+									<input type="checkbox" value="forrent"> For Rent
+								</label>
+								<label>
+									<input type="checkbox" value="other"> Other
+								</label>
+							</div>
 						<br>
 						<input type="text" name="change" value="add" hidden>
 						<button class="btn btn-default" type ="reset">Clear</button>

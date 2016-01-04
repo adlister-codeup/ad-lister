@@ -24,3 +24,4 @@
     </div>
   </div>
 </nav>
+<script src="js/buttons.js"></script>
