@@ -36,6 +36,22 @@
 			$data["categories"] = trim($a, ',');
 			return $data;
 		}
+		protected function format($data)
+		{
+			if (strlen($data["phone"]) == 7 )
+			{
+				$data["phone"] = substr($data["phone"], 1, 3)."-".substr($data["phone"], 4, 4);
+			}
+			elseif (strlen($data["phone"]) == 10)
+			{
+				$data["phone"] = "(".substr($data["phone"], 1, 3).")".substr($data["phone"], 4, 3)."-".substr($data["phone"], 7, 4);
+			}
+			elseif (strlen($data["phone"]) == 11)
+			{
+				$data["phone"] = substr($data["phone"], 1, 1)."+ (".substr($data["phone"], 2, 3).")".substr($data["phone"], 5, 3)."-".substr($data["phone"], 8, 4);
+			}
+			return $data;
+		}
 		public function addAd($data)
 		{
 			$logger = new Log("AdTable", "addAd", "logs");
@@ -121,7 +137,15 @@
 			$stmt->bindValue(":id", $id, PDO::PARAM_INT);
 			$stmt->execute();
 			$data = $stmt->fetch(PDO::FETCH_ASSOC);
-			$data["images"] = explode("|", $data["images"]);
+			if ($data)
+			{
+				$data = $this->format($data);
+				$data["images"] = explode("|", $data["images"]);
+			}
+			else
+			{
+				throw new Exception('$id is an invalid Ad ID.');
+			}
 			unset($logger);
 			return $data;
 		}
