@@ -42,12 +42,13 @@
                                     </div>
                                 </div>
                         </div>
+                        <br>
                         <div id="ap_slod_keywords_wrap" class="ap_sys_align_none ap_slod_width_2">
                             <input type="text" id="ap_slod_keywords" class="form-control" value="">
                         </div>
                         <div class="search-button-wrap">
                             <div class="search-button-wrap">
-                                <div id="ap_slod_submit" class="ap_sys_align_none ap_slod_width_2 btn btn-primary">Search</div>
+                                <div id="ap_slod_submit" class="ap_sys_align_none ap_slod_width_2 btn">Search</div>
                             </div>
                         </div>
                         <div class="ap_sys_clear"></div>
