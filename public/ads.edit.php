@@ -44,7 +44,7 @@
   	<link rel="stylesheet" href="../css/home.css">
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   	<title>Krieger's List</title>
-  	<?php// include '../views/partials/navbar.php'; ?>
+  	<?php include '../views/partials/navbar.php'; ?>
   	<div class="container">
     	<div class="page-header">
    			<h2>Edit your listing</h2>
@@ -59,32 +59,8 @@
 						<input class="form-control" type="text" id="title" placeholder="Title" value="<?=$title?>" required>
 						<label for="desc">Current Description</label>
 						<textarea class="form-control" type="text" id="desc" placeholder="Description"><?=$description?></textarea>
-						<label for="img">Current Images</label>
-							<div class="row">
-					            <div class="col-sm-3 col-xs-6">
-					                <a href="#">
-					                    <img class="img-responsive portfolio-item" src="http://placehold.it/200x100" alt="">
-					                </a>
-					                <input type="file" id="img">
-					            </div>
-					            <div class="col-sm-3 col-xs-6">
-					                <a href="#">
-					                    <img class="img-responsive portfolio-item" src="http://placehold.it/200x100" alt="">
-					                </a>
-					                <input type="file" id="img">
-					            </div>
-					            <div class="col-sm-3 col-xs-6">
-					                <a href="#">
-					                    <img class="img-responsive portfolio-item" src="http://placehold.it/200x100" alt="">
-					                </a>
-					                <input type="file" id="img">
-					            </div>
-					            <div class="col-sm-3 col-xs-6">
-					                <a href="#">
-					                    <img class="img-responsive portfolio-item" src="http://placehold.it/200x100" alt="">
-					                </a>
-					                <input type="file" id="img">
-					            </div>
+						<button><a href="http://adlister.dev/image_edit.php">Change Images</a></button>
+						<br>
 						<label for="email">Contact Email</label>
 						<input class="form-control" type="email" id="email" placeholder="email@email.email" value="<?=$email?>" required>
 						<label for="phone">Phone</label>
