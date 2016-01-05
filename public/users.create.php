@@ -81,7 +81,7 @@ if (!empty($_POST)) {
         $user->birth_date = $formattedDate;
         $user->gender = $gender;
         $user->save();
-        header("Location: /users.edit.php");
+        header("Location: /auth.login.php");
     }
 }
 $findError = 'errorFinder'; 
