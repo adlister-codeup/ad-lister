@@ -1,4 +1,5 @@
 <?php
+    session_start();
     require_once "../models/AdTable.php";
     if (isset($_GET["ad"]))
     {
@@ -7,19 +8,6 @@
         if ($data["images"][0] == "")
         {
             $data["images"][0] = "img/no_image_available.png";
-        }
-        if ($data["phone"] != "")
-        {
-            if (strlen($data["phone"]) == 7)
-            {
-                $data["phone"] = substr($data["phone"], 0, 3)."-".substr($data["phone"], 0, 4);
-            } else if (strlen($data["phone"]) == 10)
-            {
-                $data["phone"] = substr($data["phone"], 0, 3)."-".substr($data["phone"], 0, 3)."-".substr($data["phone"], 0, 4);
-            } else if (strlen($data["phone"]) == 11)
-            {
-                $data["phone"] = substr($data["phone"], 0, 1)." ".substr($data["phone"], 0, 3)."-".substr($data["phone"], 0, 3)."-".substr($data["phone"], 0, 4);
-            }
         }
     }
 ?>

@@ -10,16 +10,15 @@
                             <select class="ap_search_categories" style="display: none;">
                                 <option id="" value="all-categories">All Categories</option>
                                     <optgroup class="ap_sub_cats">
-                                        <option id="" value="bulletin-board"> Bulletin Board </option>
-                                        <option id="" value="business-service-directory"> Business Service Directory </option>
-                                        <option id="" value="business-to-business"> Business To Business </option>
-                                        <option id="" value="commercial-real-estate"> Commercial Real Estate </option>
+                                        <option id="" value="automobiles"> Automobiles </option>
+                                        <option id="" value="bionicparts"> Bionic Parts </option>
+                                        <option id="" value="blackmarket"> Black Market </option>
                                         <option id="" value="education"> Education </option>
                                         <option id="" value="jobs"> Jobs </option>
-                                        <option id="" value="other-real-estate"> Other Real Estate </option>
-                                        <option id="" value="other-transportation"> Other Transportation </option>
-                                        <option id="" value="real-estate-for-rent"> Real Estate For Rent </option>
-                                        <option id="" value="stuff"> Stuff </option>
+                                        <option id="" value="pets"> Pets </option>
+                                        <option id="" value="home"> Home </option>
+                                        <option id="" value="forrent"> For Rent </option>
+                                        <option id="" value="other"> Other </option>
                                     </optgroup>
                             </select>
                                 <div class="btn-group bootstrap-select ap_search_categories">
@@ -31,7 +30,7 @@
                                             <li rel="0" class="selected"><a tabindex="0" class="" style=""><span class="text">All Categories</span></a></li>
                                             <li rel="1"><a tabindex="0" class="opt " style=""><span class="text"> Automobiles </span></a></li>
                                             <li rel="2"><a tabindex="0" class="opt " style=""><span class="text"> Bionic parts </span></a></li>
-                                            <li rel="3"><a tabindex="0" class="opt " style=""><span class="text"> Commercial Real Estate </span></a></li>
+                                            <li rel="3"><a tabindex="0" class="opt " style=""><span class="text"> Black Market </span></a></li>
                                             <li rel="4"><a tabindex="0" class="opt " style=""><span class="text"> Education </span></a></li>
                                             <li rel="5"><a tabindex="0" class="opt " style=""><span class="text"> Jobs </span></a></li>
                                             <li rel="6"><a tabindex="0" class="opt " style=""><span class="text"> Pets </span></a></li>
@@ -42,12 +41,13 @@
                                     </div>
                                 </div>
                         </div>
+                        <br>
                         <div id="ap_slod_keywords_wrap" class="ap_sys_align_none ap_slod_width_2">
                             <input type="text" id="ap_slod_keywords" class="form-control" value="">
                         </div>
                         <div class="search-button-wrap">
                             <div class="search-button-wrap">
-                                <div id="ap_slod_submit" class="ap_sys_align_none ap_slod_width_2 btn btn-primary">Search</div>
+                                <div id="ap_slod_submit" class="ap_sys_align_none ap_slod_width_2 btn">Search</div>
                             </div>
                         </div>
                         <div class="ap_sys_clear"></div>

@@ -36,6 +36,22 @@
 			$data["categories"] = trim($a, ',');
 			return $data;
 		}
+		protected function format($data)
+		{
+			if (strlen($data["phone"]) == 7 )
+			{
+				$data["phone"] = substr($data["phone"], 0, 3)."-".substr($data["phone"], 3, 4);
+			}
+			elseif (strlen($data["phone"]) == 10)
+			{
+				$data["phone"] = "(".substr($data["phone"], 0, 3).")".substr($data["phone"], 3, 3)."-".substr($data["phone"], 6, 4);
+			}
+			elseif (strlen($data["phone"]) == 11)
+			{
+				$data["phone"] = substr($data["phone"], 0, 1)."+ (".substr($data["phone"], 1, 3).")".substr($data["phone"], 4, 3)."-".substr($data["phone"], 7, 4);
+			}
+			return $data;
+		}
 		public function addAd($data)
 		{
 			$logger = new Log("AdTable", "addAd", "logs");
@@ -80,24 +96,9 @@
 		{
 			$logger = new Log("AdTable", "editAd", "logs");
 			$logger->info("owner is set to: {$this->user}");
-			$data = parse($data);
+			$data = $this->parse($data);
 			$dbc = $this->database();
-			$imgQuery = "SELECT images FROM ads WHERE id = :adimgId AND user=:username";
-				$imgStmt = $dbc->prepare($imgQuery);
-				$imgstmt->bindValue(":username", $this->user, PDO::PARAM_STR);
-				$imgstmt->bindValue(":adimgId", $id, PDO::PARAM_INT);
-				$imgstmt->execute();
-				$imgdata = $stmt->fetch(PDO::FETCH_ASSOC);
-				$imgs = explode("|", $imgdata["images"]);
-				foreach ($imgs as $key => $value)
-				{
-					$nonKey = array_search($value ,$imgdata["images"]);
-					if ($nonKey)
-					{
-						$this->delImg($imgdata["images"][$nonKey]);
-					}
-				}
-			$query = "UPDATE ads SET title=:title, description=:description, email=:email, phone=:phone, price=:price, location=:location, images=:images, categories=:categories WHERE id = :adId AND owner=:user";
+			$query = "UPDATE ads SET title=:title, description=:description, email=:email, phone=:phone, price=:price, location=:location, categories=:categories WHERE id = :adId AND owner=:user";
 				$stmt = $dbc->prepare($query);
 				$stmt->bindValue(":user", $this->user, PDO::PARAM_STR);
 				$stmt->bindValue(":adId", $id, PDO::PARAM_INT);
@@ -107,9 +108,9 @@
 				$stmt->bindValue(":phone", $data["phone"], PDO::PARAM_STR);
 				$stmt->bindValue(":price", $data["price"], PDO::PARAM_INT);
 				$stmt->bindValue(":location", $data["location"], PDO::PARAM_STR);
-				$stmt->bindValue(":images", $data["images"], PDO::PARAM_STR);
 				$stmt->bindValue(":categories", $data["categories"], PDO::PARAM_STR);
 				$stmt->execute();
+			$logger->info("ad updated");
 			unset($logger);
 		}
 		public function loadAd($id)
@@ -121,7 +122,15 @@
 			$stmt->bindValue(":id", $id, PDO::PARAM_INT);
 			$stmt->execute();
 			$data = $stmt->fetch(PDO::FETCH_ASSOC);
-			$data["images"] = explode("|", $data["images"]);
+			if ($data)
+			{
+				$data = $this->format($data);
+				$data["images"] = explode("|", $data["images"]);
+			}
+			else
+			{
+				throw new Exception('$id is an invalid Ad ID.');
+			}
 			unset($logger);
 			return $data;
 		}

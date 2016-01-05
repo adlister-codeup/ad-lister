@@ -1,3 +1,47 @@
+<?php
+		require_once "../models/AdTable.php";
+		session_start();
+		$ads = new AdTable();
+		if (isset($_POST["title"]) && isset($_SESSION["user"]) && isset($_GET["ad"]))
+		{
+			$ads->user = $_SESSION["user"];
+			$ads->editAd($_POST, $_GET["ad"]);
+			header("Location: http://adlister.dev/ads.show.php?ad={$_GET["ad"]}");
+		}
+		if (isset($_GET["ad"]))
+		{
+			if (isset($_SESSION["user"]))
+			{
+				try
+				{
+					$ad = $ads->loadAd($_GET["ad"]);
+				} catch (Exception $e)
+				{
+					echo "Invalid Ad id.";
+					exit;
+				}
+				if ($_SESSION["user"]!=$ad["owner"])
+				{
+					echo "this is not your ad, you do not have permission to edit it.";
+					exit;
+				} 
+				else
+				{
+					extract($ad);
+				}
+			} 
+			else
+			{
+				echo "Please log in.";
+				exit;
+			}
+		} 
+		else
+		{
+			echo "Ad does not exist.";
+			exit;
+		}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,45 +60,23 @@
 	<body>
 	 		<div class="row">
 		 		<div class="col-md-10 col-md-offset-1">
-			 		<form class="form-group">
+			 		<form class="form-group" action='#' method='POST'>
 			 			<label for="title">Current Title</label>
-						<input class="form-control" type="text" id="title" placeholder="Title" required>
+						<input class="form-control" name="title" type="text" id="title" placeholder="Title" value="<?=$title?>" required>
 						<label for="desc">Current Description</label>
-						<textarea class="form-control" type="text" id="desc" placeholder="Description"></textarea>
-						<label for="img">Current Images</label>
-							<div class="row">
-					            <div class="col-sm-3 col-xs-6">
-					                <a href="#">
-					                    <img class="img-responsive portfolio-item" src="http://placehold.it/200x100" alt="">
-					                </a>
-					                <input type="file" id="img">
-					            </div>
-					            <div class="col-sm-3 col-xs-6">
-					                <a href="#">
-					                    <img class="img-responsive portfolio-item" src="http://placehold.it/200x100" alt="">
-					                </a>
-					                <input type="file" id="img">
-					            </div>
-					            <div class="col-sm-3 col-xs-6">
-					                <a href="#">
-					                    <img class="img-responsive portfolio-item" src="http://placehold.it/200x100" alt="">
-					                </a>
-					                <input type="file" id="img">
-					            </div>
-					            <div class="col-sm-3 col-xs-6">
-					                <a href="#">
-					                    <img class="img-responsive portfolio-item" src="http://placehold.it/200x100" alt="">
-					                </a>
-					                <input type="file" id="img">
-					            </div>
-						<label for="email">Email</label>
-						<input class="form-control" type="email" id="email" placeholder="email@email.email" required>
+						<textarea class="form-control" name="description" type="text" id="desc" placeholder="Description"><?=$description?></textarea>
+						<button class="btn btn-default"><a href="http://adlister.dev/image_edit.php">Change Images</a></button>
+						<br>
+						<label for="email">Contact Email</label>
+						<input class="form-control" name="email" type="email" id="email" placeholder="email@email.email" value="<?=$email?>" required>
 						<label for="phone">Phone</label>
-						<input class="form-control" type="tel" id="phone" placeholder="Enter Phone Number">
+						<input class="form-control" name="phone" type="tel" id="phone" placeholder="Enter Phone Number" value="<?=$phone?>">
 						<label for="price">Price $</label>
-						<input class="form-control" type="number" id="price" placeholder="0.00" required>
+						<input class="form-control" name="price" type="number" id="price" placeholder="0.00" value="<?=$price?>" required>
 						<label for="location">Location</label>
-						<input class="form-control" type="text" id="location" placeholder="san antonio">
+						<input class="form-control" name="location" type="text" id="location" placeholder="san antonio" value="<?=$location?>">
+						<label for="location">Categories</label>
+						<input class="form-control" name="categories" type="text" id="categories" placeholder="toys, robotic, etc" value="<?=$categories?>">
 						<br>
 						<button class="btn btn-default" type ="reset">Clear</button>
 						<button class="btn btn-success">Update listing</button>
