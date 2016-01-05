@@ -4,6 +4,7 @@
 	class AdTable extends Image
 	{
 		public $user;
+
 		public function loadAds($offset, $amount)
 		{
 			$logger = new Log("AdTable", "loadAds", "logs");
@@ -130,6 +131,26 @@
 			}
 			unset($logger);
 			return $data;
+		}
+		public static function searchAll($search) 
+		{
+			$dbc=$this->dbc();
+			$search = "%" . $search . "%";
+			$query = "SELECT * FROM ads WHERE title LIKE :search";
+
+			$stmt = self::$dbc->prepare($query);
+        	$stmt->bindValue(':search', $search, PDO::PARAM_STR);
+        	$stmt->execute();
+        	$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			
+			$instance = null;
+
+        	if ($result)
+        	{
+            	$instance = new static;
+            	$instance->attributes = $result;
+        	}
+        	return $result;
 		}
 	}
 ?>

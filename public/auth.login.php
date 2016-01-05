@@ -4,7 +4,7 @@ require_once '../utils/input.php';
 require_once '../models/BaseModel.php';
 
 $sessionId = session_id();
-if (Auth::check()) {
+if (!Auth::check()) {
   header("Location: /index.php");
   die();
 } 
@@ -55,23 +55,18 @@ if (!empty($_POST)) {
     </div>
   </div>        
   <div class="container center-block">
-    <div class="row">
-      <div class="col-md-10 col-md-offset-1">
-        <form class="form-group" action='#' method='POST'>
-          <h4 class="form-signin-heading">New? <button id="signupbtn" type="button" class="btn">Sign up!</button></h4>
-            <label for="inputEmail" class="sr-only">Username</label>
-            <input type="username" name ='username'id="input_username" class="form-control" placeholder="Enter Username" required="" autofocus="">
-            <label for="inputPassword" class="sr-only">Password</label>
-            <input type="password" name='password' id="inputPassword" class="form-control" placeholder="Password" required="">
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" value="remember-me"> Remember me
-              </label>
-            </div>
-                <button class="largebtn" type='submit'>Login</button>
-        </form> 
-      </div>
-    </div>  
+    <form class="form-signin signup" action='#' method='POST'>
+      <h4 class="form-signin-heading">New? <button type="button" class="btn"><a href="/users.create.php">Sign up!</a></button></h4>
+        <label for="inputEmail" class="sr-only">Username</label>
+        <input type="username" name ='username'id="input_username" class="form-control" placeholder="Enter Username" required="" autofocus=""><br>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" name='password' id="inputPassword" class="form-control" placeholder="Password" required="">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" value="remember-me"> Remember me
+          </label>
+        </div>
+            <button class="largebtn" type='submit'>Login</button>   
   </div>
 </body>
 <script src="js/buttons.js"></script>
