@@ -4,7 +4,7 @@ require_once '../utils/input.php';
 require_once '../models/BaseModel.php';
 
 $sessionId = session_id();
-if (Auth::check()) {
+if (!Auth::check()) {
   header("Location: /index.php");
   die();
 } 

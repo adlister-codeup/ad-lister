@@ -4,7 +4,7 @@ require_once '../utils/Log.php';
 require_once '../models/User.php';
 require_once '../utils/Auth.php';
 
-if (Auth::check()) {
+if (!Auth::check()) {
     header("Location: /index.php");
     die();
 }
