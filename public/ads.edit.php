@@ -2,6 +2,13 @@
 		require_once "../models/AdTable.php";
 		session_start();
 		$ads = new AdTable();
+		if (isset($_POST["delete"])&& isset($_SESSION["user"]) && isset($_GET["ad"]))
+		{
+			$ads->user = $_SESSION["user"];
+			$ads->deleteAd($_GET["ad"]);
+			header("Location: http://adlister.dev");
+			exit();
+		}
 		if (isset($_POST["title"]) && isset($_SESSION["user"]) && isset($_GET["ad"]))
 		{
 			$ads->user = $_SESSION["user"];
@@ -72,7 +79,7 @@
 						<label for="phone">Phone</label>
 						<input class="form-control" name="phone" type="tel" id="phone" placeholder="Enter Phone Number" value="<?=$phone?>">
 						<label for="price">Price $</label>
-						<input class="form-control" name="price" type="number" id="price" placeholder="0.00" value="<?=$price?>" required>
+						<input class="form-control" name="price" type="text" id="price" placeholder="0.00" value="<?=$price?>" required>
 						<label for="location">Location</label>
 						<input class="form-control" name="location" type="text" id="location" placeholder="san antonio" value="<?=$location?>">
 						<label for="location">Categories</label>
@@ -80,6 +87,10 @@
 						<br>
 						<button class="btn btn-default" type ="reset">Clear</button>
 						<button class="btn btn-success">Update listing</button>
+			 		</form>
+			 		<form action='#' method='POST'>
+			 			<input hidden name="delete" value="true">
+			 			<button class="btn btn-warning" id="adddelete">Delete</button>
 			 		</form>
 		 		</div>
 		 	</div>

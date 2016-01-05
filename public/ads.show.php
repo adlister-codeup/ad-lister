@@ -5,7 +5,7 @@
     {
         $ad = new AdTable();
         $data =  $ad->loadAd($_GET["ad"]);
-        if ($data["images"][0] == "")
+        if (!isset($data["images"][0]))
         {
             $data["images"][0] = "img/no_image_available.png";
         }
@@ -33,8 +33,10 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header"><?php echo $data["title"] ?>
-                        <small><?php echo $data["location"] ?></small>
-                        <small><a href="users.show.php"><?php echo $data["owner"] ?></a></small>
+                        <small>
+                            <?php echo $data["location"] ?>
+                            <a href="users.show.php"><?php echo $data["owner"] ?></a>
+                        </small>
                     </h1>
                 </div>
             </div>
@@ -43,8 +45,8 @@
                     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                     <!-- Indicators -->
                         <ol class="carousel-indicators">
-                            <?php foreach ($data["images"] as $key => $value) { 
-                                if ($key == 0) { ?>
+                            <?php foreach ($data["images"] as $key => $value) { ?>
+                                <?php if ($key == 0) { ?>
                                     <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
                                <?php }
                                 else
@@ -61,14 +63,14 @@
                                     <div class="item active">
                                         <a href="http://adlister.dev/<?php echo $value ?>" target="_blank"> <img src ="http://adlister.dev/<?php echo $value ?>" alt=""></a>
                                         <div class="carousel-caption"></div>
-                                    </div>'
+                                    </div>
                                 <?php }
                                 else 
                                 { ?>
                                     <div class="item">
                                         <a href="http://adlister.dev/<?php echo $value ?>" target="_blank"><img src ="http://adlister.dev/<?php echo $value ?>" alt=""></a>
                                         <div class="carousel-caption"></div>
-                                    </div>'
+                                    </div>
                                <?php } 
                             } ?>
                         </div>

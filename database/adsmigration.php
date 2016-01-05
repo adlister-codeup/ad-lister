@@ -15,7 +15,6 @@
 		phone VARCHAR(12),
 		price FLOAT NOT NULL,
 		location VARCHAR(250) NOT NULL,
-		images TEXT,
 		categories TEXT,
 		PRIMARY KEY (id)
 	)";

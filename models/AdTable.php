@@ -1,22 +1,15 @@
 <?php
-	require_once "../utils/Log.php";
-	require_once '../database/private.php';
+	require_once "image.php";
 
-	class AdTable 
+	class AdTable extends Image
 	{
 		public $user;
-		protected function database()
-		{
-			$dbc = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, USER, PASS);
-			$dbc->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			return $dbc;
-		}
 		public function loadAds($offset, $amount)
 		{
 			$logger = new Log("AdTable", "loadAds", "logs");
 			$logger->info("Offset: {$offset} Amount: {$amount}");
 			$dbc = $this->database();
-			$query = "SELECT id, owner, title, description, email, phone, price, location, images, categories FROM ads LIMIT :limit OFFSET :offset";
+			$query = "SELECT id, owner, title, description, email, phone, price, location, categories FROM ads LIMIT :limit OFFSET :offset";
 			$stmt = $dbc->prepare($query);
 			$stmt->bindValue(":limit", $amount, PDO::PARAM_INT);
 			$stmt->bindValue(":offset", $offset, PDO::PARAM_INT);
@@ -24,7 +17,7 @@
 			$data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 			foreach ($data as $key => $value) 
 			{
-				$data[$key]["images"] = explode("|", $data[$key]["images"]);
+				$data[$key]["images"] = $this->loadImg($value["id"]);
 			}
 			unset($logger);
 			return json_encode($data); // return the data as a json string
@@ -58,7 +51,7 @@
 			$logger->info("owner is set to: {$this->user}");
 			$data = $this->parse($data);
 			$dbc = $this->database();
-			$query = "INSERT into ads (owner, title, description, email, phone, price, location, images, categories) VALUES (:owner, :title, :description, :email, :phone, :price, :location, :images, :categories)";
+			$query = "INSERT into ads (owner, title, description, email, phone, price, location, categories) VALUES (:owner, :title, :description, :email, :phone, :price, :location, :categories)";
 				$stmt = $dbc->prepare($query);
 				$stmt->bindValue(":owner", $this->user, PDO::PARAM_STR);
 				$stmt->bindValue(":title", $data["title"], PDO::PARAM_STR);
@@ -67,9 +60,13 @@
 				$stmt->bindValue(":phone", $data["phone"], PDO::PARAM_STR);
 				$stmt->bindValue(":price", $data["price"], PDO::PARAM_INT);
 				$stmt->bindValue(":location", $data["location"], PDO::PARAM_STR);
-				$stmt->bindValue(":images", $data["images"], PDO::PARAM_STR);
 				$stmt->bindValue(":categories", $data["categories"], PDO::PARAM_STR);
 				$stmt->execute();
+			if (isset($data["images"]))
+			{	
+				$adid = $dbc->lastInsertId();
+				$this->saveImg($data["images"], $adid);
+			}
 			unset($logger);
 		}
 		public function deleteAd($id)
@@ -77,19 +74,19 @@
 			$logger = new Log("AdTable", "deleteAd", "logs");
 			$logger->info("owner is set to: {$this->user}");
 			$dbc = $this->database();
-			$imgQuery = "SELECT images FROM ads WHERE id = :adimgId AND user=:username";
-				$imgStmt = $dbc->prepare($imgQuery);
-				$imgstmt->bindValue(":username", $this->user, PDO::PARAM_STR);
-				$imgstmt->bindValue(":adimgId", $id, PDO::PARAM_INT);
-				$imgstmt->execute();
-				$imgdata = $stmt->fetch(PDO::FETCH_ASSOC);
-				$imgs = explode("|", $imgdata["images"]);
-				$this->delImg($imgs);
 			$query = "DELETE from ads WHERE id = :adId AND owner=:user";
 				$stmt = $dbc->prepare($query);
 				$stmt->bindValue(":user", $this->user, PDO::PARAM_STR);
 				$stmt->bindValue(":adId", $id, PDO::PARAM_INT);
-				$stmt->execute();
+				$check = $stmt->execute();
+			if ($check == 1)
+			{
+				$this->deleteImg($id);
+			}
+			else
+			{
+				$logger->error("Nothing deleted.");
+			}
 			unset($logger);
 		}
 		public function editAd($data, $id)
@@ -117,7 +114,7 @@
 		{
 			$logger = new Log("AdTable", "loadAd", "logs");
 			$dbc = $this->database();
-			$query = "SELECT id, owner, title, description, email, phone, price, location, images, categories FROM ads WHERE id=:id";
+			$query = "SELECT id, owner, title, description, email, phone, price, location, categories FROM ads WHERE id=:id";
 			$stmt = $dbc->prepare($query);
 			$stmt->bindValue(":id", $id, PDO::PARAM_INT);
 			$stmt->execute();
@@ -125,7 +122,7 @@
 			if ($data)
 			{
 				$data = $this->format($data);
-				$data["images"] = explode("|", $data["images"]);
+				$data["images"]= $this->loadImg($id);
 			}
 			else
 			{
@@ -133,38 +130,6 @@
 			}
 			unset($logger);
 			return $data;
-		}
-		public function delImg($imgs, $id)
-		{
-			$logger = new Log("AdTable", "delimg", "logs");
-			$dbc = $this->database();
-			$query = "SELECT images FROM ads WHERE owner=:owner AND id = :adId";
-			$stmt = $dbc->prepare($query);
-			$stmt->bindValue(":owner", $this->user, PDO::PARAM_STR);
-			$stmt->bindValue(":adId", $id, PDO::PARAM_INT);
-			$stmt->execute();
-			$data = $stmt->fetch(PDO::FETCH_ASSOC);
-			$data["images"] = explode("|", $data["images"]);
-			foreach ($imgs as $imgkey => $imgvalue)
-			{
-				foreach ($data["images"] as $key => $value)
-				{
-					if ($imgvalue == $value)
-					{
-						unlink($imgvalue);
-						unset($data["images"][$key]);
-						$logger->info("image $value deleted");
-					}
-				}
-			}
-			$images = implode("|", $data["images"]);
-			$changeQuery = "UPDATE ads SET images=:images owner=:owner AND id = :adId";
-			$changeStmt = $dbc->prepare($changeQuery);
-			$changeStmt->bindValue(":images", $images, PDO::PARAM_INT);
-			$changeStmt->bindValue(":owner", $this->user, PDO::PARAM_STR);
-			$changeStmt->bindValue(":adId", $id, PDO::PARAM_INT);
-			$changeStmt->execute();
-			unset($logger);
 		}
 	}
 ?>
