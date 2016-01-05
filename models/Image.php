@@ -76,7 +76,7 @@
 			$data = $pathstmt->fetchAll(PDO::FETCH_ASSOC);
 			foreach ($data as $key => $value)
 			{
-				unlink($value);
+				unlink($value["imgpath"]);
 			}
 			$query = "DELETE from images WHERE adid=:adid";
 			$stmt = $dbc->prepare($query);
