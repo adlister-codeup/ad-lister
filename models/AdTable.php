@@ -5,6 +5,8 @@
 	class AdTable 
 	{
 		public $user;
+		protected static $table = 'ads';
+
 		protected function database()
 		{
 			$dbc = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, USER, PASS);
@@ -117,7 +119,7 @@
 		{
 			$logger = new Log("AdTable", "loadAd", "logs");
 			$dbc = $this->database();
-			$query = "SELECT id, owner, title, description, email, phone, price, location, images, categories FROM ads WHERE id=:id";
+			$query = "SELECT * FROM ads WHERE id=:id";
 			$stmt = $dbc->prepare($query);
 			$stmt->bindValue(":id", $id, PDO::PARAM_INT);
 			$stmt->execute();
@@ -165,6 +167,26 @@
 			$changeStmt->bindValue(":adId", $id, PDO::PARAM_INT);
 			$changeStmt->execute();
 			unset($logger);
+		}
+		public static function searchAll($search) 
+		{
+			$dbc=$this->dbc();
+			$search = "%" . $search . "%";
+			$query = "SELECT * FROM ads WHERE title LIKE :search";
+
+			$stmt = self::$dbc->prepare($query);
+        	$stmt->bindValue(':search', $search, PDO::PARAM_STR);
+        	$stmt->execute();
+        	$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			
+			$instance = null;
+
+        	if ($result)
+        	{
+            	$instance = new static;
+            	$instance->attributes = $result;
+        	}
+        	return $result;
 		}
 	}
 ?>
