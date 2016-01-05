@@ -29,9 +29,8 @@
                         </div>
                         <br>
                         <div>
-                            <form method="post" action="" id="searchform">
-                            <input type="text" name="search"> 
-                            <div type="submit" name="submit" value="Search" id="" class="ap_sys_align_none ap_slod_width_2 btn">Search</div>
+                            <input id="searchfield" type="text" name="search"> 
+                            <button id="searchbtn" class="btn">Search</button>
                         </div>
                     </div>
                 </div>

@@ -3,11 +3,13 @@
 	var Onpage = 1;
 	var amount = 12;
 	var morePages;
+	var search = "";
 	$.ajax ({ // get request to load the ads from the database.
 	    type: "POST",
 	    url:"load_ads.php",
 	    data: {
-	    	amount: amount
+	    	amount: amount,
+	    	search: search
 	    },
 	    dataType: "json",
 	    success: function(data) {
@@ -34,9 +36,6 @@
 			var row = $('<div class="row">').addClass("rowplace"+rowplace);
 			$("#ads").append(row);
 			for (var div = 0; div < 3; div++) {
-				if (data[dataLocation].images[0] == "") {
-					data[dataLocation].images[0] = "/img/no_image_available.png";
-				}
 				var divopen = $('<div class="col-md-4 portfolio-item">').addClass("divof"+dataLocation);
 				var linkopen = $('<a href="ads.show.php">').attr("href", "ads.show.php?ad="+data[dataLocation].id).addClass("link"+dataLocation);
 				var image = $('<img class="img-responsive imagefront" src="http://placehold.it/700x400" alt="">').attr("src", data[dataLocation].images[0]);
@@ -79,7 +78,8 @@
 	    url:"load_ads.php",
 	    data: {
 	    	page: page,
-	    	amount: amount
+	    	amount: amount,
+	    	search: search
 	    },
 	    dataType: "json",
 	    success: function(data) {
@@ -91,6 +91,17 @@
 	    }
 	});
 	}
+	function runsearch()
+	{
+		if (Onpage != 1)
+		{
+			Onpage = 1;
+		}
+		search = document.getElementById("searchfield").value;
+		console.log(search);
+		pageChange(Onpage);
+	}
 	document.getElementById("nextbtn").addEventListener("click", nextpage);
 	document.getElementById("prevbtn").addEventListener("click", prevpage);
+	document.getElementById("searchbtn").addEventListener("click", runsearch);
 })();
