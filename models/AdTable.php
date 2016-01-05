@@ -132,13 +132,14 @@
 			unset($logger);
 			return $data;
 		}
-		public static function searchAll($search) 
+		public function searchAll($offset, $amount, $search) 
 		{
-			$dbc=$this->dbc();
+			$dbc = $this->database();
 			$search = "%" . $search . "%";
-			$query = "SELECT * FROM ads WHERE title LIKE :search";
-
-			$stmt = self::$dbc->prepare($query);
+			$query = "SELECT * FROM ads WHERE title LIKE :search LIMIT :limit OFFSET :offset";
+			$stmt = $dbc->prepare($query);
+			$stmt->bindValue(":limit", $amount, PDO::PARAM_INT);
+			$stmt->bindValue(":offset", $offset, PDO::PARAM_INT);
         	$stmt->bindValue(':search', $search, PDO::PARAM_STR);
         	$stmt->execute();
         	$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -147,10 +148,12 @@
 
         	if ($result)
         	{
-            	$instance = new static;
-            	$instance->attributes = $result;
+        		foreach ($result as $key => $value) 
+				{
+					$result[$key]["images"] = $this->loadImg($value["id"]);
+				}
         	}
-        	return $result;
+        	return json_encode($result);
 		}
 	}
 ?>
