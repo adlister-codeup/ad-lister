@@ -1,10 +1,13 @@
 <?php 
 require_once '../utils/Input.php';
 require_once '../utils/Log.php';
-$logger = new Log("users.create.php","signup", "logs");
 require_once '../models/User.php';
+require_once '../utils/Auth.php';
 
-
+if (Auth::check()) {
+    header("Location: /index.php");
+    die();
+}
 $errors = [];
 if (!empty($_POST)) {
      try {
