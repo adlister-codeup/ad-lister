@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once 'Log.php';
 require_once '../models/User.php';
 class Auth 
@@ -41,7 +42,7 @@ class Auth
 		{
 			return true;
 		} 
-			return false;
+		return false;
 	}
 	public static function user() 
 	{
@@ -61,5 +62,6 @@ class Auth
 	            $params["secure"], $params["httponly"]
 	        );
 	    }
+	    session_destroy();
 	}
 }

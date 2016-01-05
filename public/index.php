@@ -1,4 +1,6 @@
-<?php session_start() ?>
+<?php 
+require_once '../utils/Auth.php';
+?>
 <!DOCTYPE html>
 <html>
 <head>
