@@ -30,7 +30,7 @@
 					<label for="phone">Phone</label>
 					<input class="form-control" type="tel" id="phone" name="phone" placeholder="Enter Phone Number">
 					<label for="price">Price $</label>
-					<input class="form-control" type="number" id="price" name="price" placeholder="0.00" required>
+					<input class="form-control" type="text" id="price" name="price" placeholder="0.00" required>
 					<label for="location">Location</label>
 					<input class="form-control" type="text" id="location" name="location" placeholder="san antonio">
 					<label for="categories">Categories</label>

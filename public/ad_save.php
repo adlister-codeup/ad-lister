@@ -1,26 +1,22 @@
 <?php
 	require_once "../models/AdTable.php";
-	require_once "../models/SaveImage.php";
 	if (isset($_POST["change"]))
 	{
 		if ($_POST["change"] == "add")
 		{
 			if (!empty($_FILES["images"]))
 			{
-				$images = $_FILES["images"];
-				$saveImage = new SaveImage();
-				$paths = $saveImage->save($images);
-				echo $paths;
+				$data["images"] = $_FILES["images"];
 			}
 			foreach ($_POST as $key => $value) 
 			{
 				$data[$key] = $value;
 			}
+			session_start();
 			unset($data["change"]);
-			$data["images"] = $paths;
-
+			$data["categories"]="derp";
 			$add = new AdTable();
-			$add->user ="krieger";
+			$add->user = $_SESSION["user"];
 			$add->addAd($data);
 			header('Location: http://adlister.dev');
 		}
