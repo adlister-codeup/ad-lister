@@ -29,7 +29,6 @@ class Auth
 			{
 				session_start();
 				$_SESSION['user'] = $username;
-				var_dump($username);
 				return true;
 			} else {
 				return false;

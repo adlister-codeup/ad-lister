@@ -58,7 +58,7 @@ if (!empty($_POST)) {
     <form class="form-signin signup" action='#' method='POST'>
       <h4 class="form-signin-heading">New? <button type="button" class="btn"><a href="/users.create.php">Sign up!</a></button></h4>
         <label for="inputEmail" class="sr-only">Username</label>
-        <input type="username" name ='username'id="input_username" class="form-control" placeholder="Enter Username" required="" autofocus="">
+        <input type="username" name ='username'id="input_username" class="form-control" placeholder="Enter Username" required="" autofocus=""><br>
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" name='password' id="inputPassword" class="form-control" placeholder="Password" required="">
         <div class="checkbox">
