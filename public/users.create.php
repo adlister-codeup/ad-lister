@@ -4,10 +4,10 @@ require_once '../utils/Log.php';
 require_once '../models/User.php';
 require_once '../utils/Auth.php';
 
-// if (!Auth::check()) {
-//     header("Location: /index.php");
-//     die();
-// }
+if (Auth::check()) {
+    header("Location: /index.php");
+    die();
+}
 $errors = [];
 if (!empty($_POST)) {
      try {
@@ -81,7 +81,10 @@ if (!empty($_POST)) {
         $user->birth_date = $formattedDate;
         $user->gender = $gender;
         $user->save();
-        header("Location: /auth.login.php");
+        if(Auth::attempt($userName,$password)) 
+        {
+            header("Location: /users.edit.php");   
+        }
     }
 }
 $findError = 'errorFinder'; 

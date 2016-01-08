@@ -1,6 +1,7 @@
 <?php
 require_once '../utils/Input.php';
 require_once '../models/User.php';
+require_once '../utils/Auth.php';
 $errors = [];
 if (!empty($_POST)) {
      try {
@@ -55,7 +56,7 @@ if (!empty($_POST)) {
         }
     }
     if (empty($errors)) {
-    $formattedDate = $dateTimeObject->format('Y-m-d');
+        $formattedDate = $dateTimeObject->format('Y-m-d');
         $user->username = $userName;
         $user->first_name = $firstName;
         $user->last_name = $lastName;
