@@ -38,7 +38,7 @@
 			for (var div = 0; div < 3; div++) {
 				var divopen = $('<div class="col-md-4 portfolio-item">').addClass("divof"+dataLocation);
 				var linkopen = $('<a href="ads.show.php">').attr("href", "ads.show.php?ad="+data[dataLocation].id).addClass("link"+dataLocation);
-				var image = $('<img class="img-responsive imagefront" src="http://placehold.it/700x400" alt="">').attr("src", data[dataLocation].images[0]);
+				var image = $('<img class="img-responsive imagefront" src="http://adlister.dev/img/no_image_available.png" alt="">').attr("src", data[dataLocation].images[0]);
 				var h3 = $('<h3></h3').addClass("h3of"+dataLocation);
 				var titlelink = $('<a href="ads.show.php"></a>').attr("href", "ads.show.php?ad="+data[dataLocation].id).text(data[dataLocation].title);
 				var desc = $('<p></p>').text(data[dataLocation].description.substring(0, 100)+"...");
