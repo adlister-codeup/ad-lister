@@ -20,7 +20,7 @@ class Auth
 		$errors = [];
 		$user = new User;
 		try{ 
-			$data = $user->checkUser($username);
+			$data = $user->checkUserMatchesPassword($username);
 		} catch (Exception $e) {
 			$errors[] = $e->getMessage();
 		}

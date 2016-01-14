@@ -1,7 +1,10 @@
 <?php
 require_once '../utils/Input.php';
 require_once '../models/User.php';
+require_once '../utils/Auth.php';
 $errors = [];
+$username = $_SESSION['user'];
+$user = User::findUser($username);
 if (!empty($_POST)) {
      try {
         $userName = Input::getString('username');
@@ -9,24 +12,14 @@ if (!empty($_POST)) {
         $errors['username'] = $e->getMessage();
     }
     try {
-        $firstName = Input::getString('firstname');
+        $first_name = Input::getString('first_name');
     } catch (Exception $e) {
-        $errors['firstname'] = $e->getMessage();
+        $errors['first_name'] = $e->getMessage();
     }
     try {
-        $lastName = Input::getString('lastname');
+        $lastName = Input::getString('last_name');
     } catch (Exception $e) {
-        $errors['lastname'] = $e->getMessage();
-    }
-    try {
-        $password = Input::getString('password');
-    } catch (Exception $e) {
-        $errors['password'] = $e->getMessage();
-    }
-    try {
-        $confirmPassword = Input::getString('confirm_password');
-    } catch (Exception $e) {
-        $errors['confirm_password'] = $e->getMessage();
+        $errors['last_name'] = $e->getMessage();
     }
     try {
         $email = Input::getString('email');
@@ -35,7 +28,6 @@ if (!empty($_POST)) {
     }
     var_dump($errors);
 
-    $user = new User;
     try {
         if ($user->checkUsername($userName)) {
             throw new Exception("Username has been taken");
@@ -55,13 +47,11 @@ if (!empty($_POST)) {
         }
     }
     if (empty($errors)) {
-    $formattedDate = $dateTimeObject->format('Y-m-d');
+        $formattedDate = $dateTimeObject->format('Y-m-d');
         $user->username = $userName;
-        $user->first_name = $firstName;
-        $user->last_name = $lastName;
-        $user->hash = password_hash($confirmPassword,PASSWORD_BCRYPT);
+        $user->first_name = $first_name;
+        $user->last_name = $last_name;
         $user->email = $email;
-        $user->find(25);
         $user->save();
     }
 }
@@ -107,17 +97,17 @@ if (!empty($_POST)) {
             <div class="form-group">
               <label class="col-lg-3 control-label">First name:</label>
               <div class="col-lg-8">
-                <input class="form-control" id='firstname' name='firstname' type="text"
-                placeholder='<?= empty($errors['firstname']) ? '': "Error: " . $errors['firstname']?>'  
-                value='<?= (Input::has('firstname')) && empty($errors['firstname'])? Input::get('firstname'): ''?>'><br>
+                <input class="form-control" id='first_name' name='first_name' type="text"
+                placeholder='<?= empty($errors['first_name']) ? '': "Error: " . $errors['first_name']?>'  
+                value='<?= $user->first_name ?>'<br>
               </div>
             </div>
             <div class="form-group">
               <label class="col-lg-3 control-label">Last name:</label>
               <div class="col-lg-8">
-                <input class="form-control" id='lastname' name='lastname' type="text"
-                placeholder='<?= empty($errors['lastname']) ? '': "Error: " . $errors['lastname']?>'  
-                value='<?= (Input::has('lastname')) && empty($errors['lastname'])? Input::get('lastname'): ''?>'><br>
+                <input class="form-control" id='last_name' name='last_name' type="text"
+                placeholder='<?= empty($errors['last_name']) ? '': "Error: " . $errors['last_name']?>'  
+                value='<?= $user->last_name ?>'><br>
               </div>
             </div>
             <div class="form-group">
@@ -125,7 +115,7 @@ if (!empty($_POST)) {
               <div class="col-lg-8">
                 <input class="form-control" id='email' name='email' type="text"
                 placeholder='<?= empty($errors['email']) ? '': "Error: " . $errors['email']?>'  
-                value='<?= (Input::has('email')) && empty($errors['email'])? Input::get('email'): ''?>'><br>
+                value='<?= $user->email ?>'><br>
               </div>
             </div>
             <div class="form-group">
@@ -133,20 +123,7 @@ if (!empty($_POST)) {
               <div class="col-md-8">
                 <input class="form-control" id='username' name='username' type="text"
                 placeholder='<?= empty($errors['username']) ? '': "Error: " . $errors['username']?>' 
-                value='<?= (Input::has('username')) && empty($errors['username'])? Input::get('username'): ''?>'><br>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-md-3 control-label">Password:</label>
-              <div class="col-md-8">
-                <input class="form-control" id='password' name='password' type="password" 
-                value='<?= (Input::has('password')) && empty($errors['password'])? Input::get('password'): ''?>'><br>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-md-3 control-label">Confirm password:</label>
-              <div class="col-md-8">
-                <input class="form-control" id='confirm_password' name='confirm_password' type="password" value=""><br>
+                value='<?= $user->username ?>'><br>
               </div>
             </div>
             <div class="form-group">
