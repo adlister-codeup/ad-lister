@@ -23,7 +23,7 @@ class User extends Model
         $count = $stmt->fetchColumn();
     	return $count;
     }
-    public static function checkUser($username) 
+    public static function checkUserMatchesPassword($username) 
     {
         $query = "SELECT * FROM users WHERE username = :username";
         $stmt = self::$dbc->prepare($query);
@@ -35,5 +35,22 @@ class User extends Model
         } else {
             throw new Exception("Username or Password was invalid");
         }
+    }
+    public static function findUser($username)
+    {
+        self::dbConnect();
+        $query = "SELECT * FROM users WHERE username = :username";
+        $stmt = self::$dbc->prepare($query);
+        $stmt->bindValue(':username', $username, PDO::PARAM_STR);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $instance = null;
+        if ($result)
+        {
+            $instance = new static;
+            $instance->attributes = $result;
+        }
+        return $instance;
     }
 }

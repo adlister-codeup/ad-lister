@@ -52,7 +52,7 @@ if (!empty($_POST)) {
     }
     var_dump($errors);
 
-    $user = new User;
+    $user = new User();
     try {
         if ($user->checkUsername($userName)) {
             throw new Exception("Username has been taken");
